@@ -21,9 +21,11 @@ code {
 } */
 
 .alert {
-  width: 70%;
+  width: 100%;
 }
 
-.form-control {
+/* .form-control {
   width: 50px;
-}
+} */
+
+

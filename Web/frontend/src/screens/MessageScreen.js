@@ -1,45 +1,46 @@
 import React from 'react'
 import { Row, Col, Card, Container, Form, Alert, Image } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const MessageScreen = () => {
     return (
         <div>
-            <Container>
+            {/* <Container>
                 <Card>
                     <Card.Body>
                         <Row md={10}>
-                            <Col md={4}>
-                                <Card>
+                            <Col xs={4}>
+                                <Card style={{backgroundColor: 'lightgray'}}>
                                     <Card.Body>
-                                        {/* <Image src="" rounded /> */}
-                                        <Card.Title><strong>Antoine</strong></Card.Title>
+                                        <Card.Title><FontAwesomeIcon className="mx-2" icon={faUser}></FontAwesomeIcon><strong>Antoine</strong></Card.Title>
                                         <Card.Text>Bonjour! Oui! Comment tu t'appeles?</Card.Text>
                                     </Card.Body>
                                 </Card>
                                 <Card>
                                     <Card.Body>
-                                        <Card.Title><strong>Jessica</strong></Card.Title>
+                                        <Card.Title><FontAwesomeIcon className="mx-2" icon={faUser}></FontAwesomeIcon><strong>Jessica</strong></Card.Title>
                                         <Card.Text>Hi. Saw you in this app today</Card.Text>
                                     </Card.Body>
                                 </Card>
                                 <Card>
                                     <Card.Body>
-                                        <Card.Title><strong>Li Hua</strong></Card.Title>
+                                        <Card.Title><FontAwesomeIcon className="mx-2" icon={faUser}></FontAwesomeIcon><strong>Li Hua</strong></Card.Title>
                                         <Card.Text>Hey, wanna learn some Chinese?</Card.Text>
                                     </Card.Body>
                                 </Card>
                             </Col>
-                            <Col md={6}>
-                                <Alert variant="success"  className="mx-5">Hi! I want to start learning French, would you mind helping me?</Alert>
-                                <Alert variant="primary">Bonjour! Oui! Comment tu t'appeles?</Alert>
+                            <Col xs={6}>
+                                <Alert variant="success"  className="mx-4">Hi! I want to start learning French, would you mind helping me?</Alert>
+                                <Alert variant="primary" className="my-5">Bonjour! Oui! Comment tu t'appeles?</Alert>
                                 <Card>
-                                    <Form.Control as="textarea" placeholder="Leave a comment here" />
+                                    <Form.Control className="mx-2" as="textarea" style={{borderLeft: 'none'}} placeholder="Write a message here" />
                                 </Card>
                             </Col>
                         </Row>
                     </Card.Body>
                 </Card>
-            </Container>
+            </Container> */}
         </div>
     )
 }
