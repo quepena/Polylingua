@@ -3,6 +3,8 @@
 // connectDB();
 
 const express = require('express');
+const users = require('./data/users');
+
 
 const app = express();
 
@@ -11,7 +13,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/users', (req, res) => {
-    res.send('')
+    res.json(users);
+})
+
+app.get('/api/users/:id', (req, res) => {
+    const user = users.find((p) => p.id === req.params.id);
+    res.json(user);
 })
 
 app.listen(5000, console.log('Server'));

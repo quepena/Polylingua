@@ -26,7 +26,7 @@ const BlogScreen = () => {
                 </Row>
             </Container> */}
             <Container>
-                <Row>
+                {/* <Row>
                     <InputGroup className="my-5">
                         <FormControl placeholder="Find a user"/>
                         <Button variant="success"><FontAwesomeIcon className="mx-2" icon={faSearch}></FontAwesomeIcon></Button>
@@ -81,7 +81,7 @@ const BlogScreen = () => {
                             </Card.Body>
                         </Card>
                     </Col>
-                </Row>
+                </Row> */}
             </Container>
         </div>
     )
