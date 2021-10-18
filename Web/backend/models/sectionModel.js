@@ -6,8 +6,16 @@ const sectionSchema = new mongoose.Schema({
         required: true,
         ref: 'Language'
     },
-    posts: [postSchema],
-    subscribers: [userSchema],
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Post' 
+    }],
+    subscribers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User' 
+    }],
     numberOfSubscribers: {
         type: Number,
         required: true,
@@ -19,4 +27,4 @@ const sectionSchema = new mongoose.Schema({
 
 const Section = mongoose.model('Sections', sectionSchema);
 
-module.exports = Section;
+export default Section

@@ -9,7 +9,8 @@ const countrySchema = new mongoose.Schema({
     },
     cities: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'City'
+        required: true,
+        ref: 'City' 
     }],
 }, {
     timestamps: true,
@@ -17,4 +18,4 @@ const countrySchema = new mongoose.Schema({
 
 const Country = mongoose.model('Countries', countrySchema);
 
-module.exports = Country;
+export default Country;

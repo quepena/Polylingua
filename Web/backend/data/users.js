@@ -1,21 +1,9 @@
+
+
 const users = [
     {
         username: 'antoine123',
         password: 'antoine123',
-        knownAs: 'Antoine',
-        nativeLanguage: 2,
-        alsoSpeaks: 5,
-        isLearning: 6,
-        dateOfBirth: '02.08.1999',
-        gender: 0,
-        country: 5,
-        introduction: "Hi! I\'m Antoine!",
-        interests: 'games, plants, food',
-        created: '16.10.2021',
-        lastActive: '16.10.2021 10:05',
-        photo: 'Web/frontend/public/images/polylingua.png',
-        username: 'antoine123',
-        password: crypted,
         knownAs: 'Antoine',
         nativeLanguage: {
             type: Number,
