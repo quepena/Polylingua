@@ -8,6 +8,8 @@ import Language from './models/languageModel.js';
 import dotenv from 'dotenv'
 import Section from './models/sectionModel.js';
 import sections from './data/sections.js'
+import User from './models/userModel.js'
+import users from './data/users.js'
 
 dotenv.config();
 
@@ -19,6 +21,7 @@ const importData = async () => {
         await City.deleteMany();
         await Country.deleteMany();
         await Section.deleteMany();
+        await User.deleteMany();
 
         const sampleLanguages = languages.map(language => {
             return { ...language }
@@ -43,6 +46,12 @@ const importData = async () => {
         });
 
         await Section.insertMany(sampleSections);
+
+        const sampleUsers = users.map(user => {
+            return { ...user }
+        });
+
+        await User.insertMany(sampleUsers);
 
         console.log('Data imported');
         process.exit();
