@@ -7,6 +7,12 @@ const countrySchema = new mongoose.Schema({
         unique: true,
         lowercase: true,
     },
+    cities: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'City'
+    }],
+}, {
+    timestamps: true,
 })
 
 const Country = mongoose.model('Countries', countrySchema);

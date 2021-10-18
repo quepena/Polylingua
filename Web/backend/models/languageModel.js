@@ -7,10 +7,12 @@ const languageSchema = new mongoose.Schema({
         unique: true,
         lowercase: true,
     },
-    flag: {
+    flagUrl: {
         type: String,
         required: true,
     },
+}, {
+    timestamps: true
 })
 
 const Language = mongoose.model('Languages', languageSchema);

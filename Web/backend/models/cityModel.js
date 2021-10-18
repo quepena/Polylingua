@@ -8,9 +8,12 @@ const citySchema = new mongoose.Schema({
         lowercase: true,
     },
     countryId: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
+        ref: 'Country'
     },
+}, {
+    timestamps: true
 })
 
 const City = mongoose.model('Cities', citySchema);

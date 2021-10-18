@@ -1,6 +1,5 @@
 const users = [
     {
-        id: '1',
         username: 'antoine123',
         password: 'antoine123',
         knownAs: 'Antoine',
@@ -15,6 +14,73 @@ const users = [
         created: '16.10.2021',
         lastActive: '16.10.2021 10:05',
         photo: 'Web/frontend/public/images/polylingua.png',
+        username: 'antoine123',
+        password: crypted,
+        knownAs: 'Antoine',
+        nativeLanguage: {
+            type: Number,
+            required: true,
+        },
+        alsoSpeaks: {
+            type: Number,
+        },
+        isLearning: {
+            type: Number,
+            required: true,
+        },
+        dateOfBirth: {
+            type: Date,
+            required: true,
+        },
+        gender: {
+            type: String,
+            required: true,
+            enum: ['Male', 'Female', 'Unknown']
+        },
+        country: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Country'
+        },
+        city: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'City',
+        },
+        introduction: {
+            type: String,
+            required: true,
+        },
+        interests: {
+            type: String,
+        },
+        created: {
+            type: Date,
+            required: true,
+            default: Date.now
+        },
+        lastActive: {
+            type: Date,
+            required: true,
+            default: Date.now
+        },
+        isAdmin: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        photos: [{
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'Photo'
+        }],
+        posts: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Post'
+        }],
+        comments: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment'
+        }]
     },
     {
         id: '2',
@@ -35,4 +101,4 @@ const users = [
     }
 ]
 
-module.exports = users;
+export default users
