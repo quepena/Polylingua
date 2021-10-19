@@ -18,15 +18,18 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
     },
     nativeLanguage: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
+        ref: 'Language',
     },
     alsoSpeaks: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Language',
     },
     isLearning: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
+        ref: 'Language',
     },
     dateOfBirth: {
         type: Date,
