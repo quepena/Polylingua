@@ -5,6 +5,7 @@ import MessageScreen from './screens/MessageScreen';
 import BlogScreen from './screens/BlogScreen';
 import UsersScreen from './screens/UsersScreen';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import LoginScreen from './screens/LoginScreen';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path='/messages' component={MessageScreen} exact />
       <Route path='/' component={BlogScreen} exact />
       <Route path='/users' component={UsersScreen} />
+      <Route path="/login" component={LoginScreen}></Route>
     </Router>
   );
 }
