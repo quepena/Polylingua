@@ -1,28 +1,20 @@
 import connectDB from './config/db.js';
 import express from 'express';
 import dotenv from 'dotenv';
-import users from './data/users.js';
+import userRoutes from './routes/userRoutes.js'
 
 dotenv.config();
 
 connectDB();
 
-// const express = require('express');
-// const users = require('./data/users');
-
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('API');
-})
+app.use(express.json());
 
-app.get('/api/users', (req, res) => {
+app.get('/', (req, res) => {
     res.json(users);
 })
 
-app.get('/api/users/:id', (req, res) => {
-    const user = users.find((p) => p.id === req.params.id);
-    res.json(user);
-})
+app.use('/api/users', userRoutes);
 
 app.listen(5000, console.log('Server'));
