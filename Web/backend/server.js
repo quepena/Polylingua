@@ -2,6 +2,7 @@ import connectDB from './config/db.js';
 import express from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js'
+import languageRoutes from './routes/languageRoutes.js'
 
 dotenv.config();
 
@@ -16,5 +17,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/users', userRoutes);
+
+app.use('/api/languages', languageRoutes);
 
 app.listen(5000, console.log('Server'));

@@ -3,11 +3,18 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Container, Nav, NavDropdown, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { logout } from '../actions/userActions';
 
 const Header = () => {
+    const dispatch = useDispatch()
+
     const userLogin = useSelector(state => state.userLogin);
 
     const { userInfo } = userLogin;
+
+    const logoutHandler = () => {
+        dispatch(logout());
+    }
 
     return (
         <header>
@@ -39,22 +46,22 @@ const Header = () => {
                         <Col sm={2}>
                             {/* <NavDropdown title="My Account" id="basic-nav-dropdown"> */}
                             {userInfo ? (
-                                <NavDropdown title={userInfo.knownAs} id='name'>My profile
-                                    <LinkContainer to="users/profile"></LinkContainer>
+                                <NavDropdown title={"Hello, "+userInfo.knownAs.charAt(0).toUpperCase()+userInfo.knownAs.slice(1)} id='name'>
+                                    {/* <LinkContainer to="users/profile"></LinkContainer> */}
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item>Edit profile</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                                 </NavDropdown>
                             ) : <LinkContainer to="/login">
-                                <NavLink ></NavLink>
+                                    <Nav.Link>Sign in</Nav.Link>
                                 </LinkContainer>
                             }
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="">Edit profile</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="">Logout</NavDropdown.Item>
-                        {/* </NavDropdown> */}
-                    </Col>
-                </Row>
-            </Container>
-        </Navbar>
+                            {/* </NavDropdown> */}
+                        </Col>
+                    </Row>
+                </Container>
+            </Navbar>
         </header >
     )
 }
