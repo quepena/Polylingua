@@ -19,7 +19,8 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
     },
     nativeLanguage: {
-        type: mongoose.Schema.Types.ObjectId,
+        // type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
         ref: 'Language',
     },
@@ -28,7 +29,8 @@ const userSchema = new mongoose.Schema({
         ref: 'Language',
     },
     isLearning: {
-        type: mongoose.Schema.Types.ObjectId,
+        // type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
         ref: 'Language',
     },
@@ -42,12 +44,14 @@ const userSchema = new mongoose.Schema({
         enum: ['Male', 'Female', 'Unknown']
     },
     country: {
-        type: mongoose.Schema.Types.ObjectId,
+        // type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
         ref: 'Country'
     },
     city: {
-        type: mongoose.Schema.Types.ObjectId,
+        // type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
         ref: 'City',
     },

@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { register } from '../actions/userActions';
 import FormContainer from "../components/FormContainer";
-import { Form, Button, Row, Col, Select } from "react-bootstrap";
+import { Form, Button, Row, Col, FloatingLabel } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import Language from '../components/Language';
 import axios from "axios";
 
 const RegisterScreen = ({ location, history }) => {
@@ -17,14 +16,16 @@ const RegisterScreen = ({ location, history }) => {
     const [message, setMessage] = useState(null);
     const [knownAs, setKnownAs] = useState('');
     const [languages, setLanguage] = useState([]);
-    const [isLearning, setIsLearning] = useState('');
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [gender, setGender] = useState('');
-    const [country, setCountry] = useState('');
-    const [city, setCity] = useState('');
+    const [countries, setCountry] = useState([]);
+    const [cities, setCity] = useState([]);
     const [introduction, setIntroduction] = useState('');
 
     const [selectedNativeLanguage, setSelectedNativeLanguage] = useState('');
+    const [selectedIsLearning, setSelectedIsLearning] = useState('');
+    const [selectedCountry, setSelectedCountry] = useState('');
+    const [selectedCity, setSelectedCity] = useState('');
 
     const dispatch = useDispatch();
 
@@ -43,6 +44,16 @@ const RegisterScreen = ({ location, history }) => {
             setLanguage(data)
         };
         fetchLanguages();
+        const fetchCountries = async () => {
+            const { data } = await axios.get('/api/countries');
+            setCountry(data)
+        };
+        fetchCountries();
+        const fetchCities = async () => {
+            const { data } = await axios.get('/api/cities');
+            setCity(data)
+        };
+        fetchCities();
     }, [history, userInfo, redirect])
 
     const submitHandler = (e) => {
@@ -50,7 +61,8 @@ const RegisterScreen = ({ location, history }) => {
         if (password !== confirmPassword) {
             setMessage('Passwords don\'t match');
         } else {
-            dispatch(register(username, password));
+            dispatch(register(username, password, knownAs, selectedNativeLanguage, selectedIsLearning, dateOfBirth, gender, selectedCountry, selectedCity, introduction));
+            // dispatch(register(username, password, knownAs))
         }
     }
 
@@ -101,27 +113,75 @@ const RegisterScreen = ({ location, history }) => {
                 </Form.Group>
                 <Form.Group controlId="nativeLanguage">
                     <Form.Label>Native Language</Form.Label>
-                    <Form.Control as="select" type="">
+                    <Form.Control as="select" type="" value={selectedNativeLanguage}
+                        onChange={(e) => setSelectedNativeLanguage(e.target.value)}>
                         {
                             languages.map((language) => (
-                                    <option value={language.languageName} key={language.languageName}>
-                                        {language.languageName}
-                                    </option>
+                                <option value={language.languageName} key={language._id}>
+                                    {language.languageName}
+                                </option>
                             ))
                         }
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="isLearning">
                     <Form.Label>Language you want to learn</Form.Label>
-                    <Form.Control as="select" type="">
+                    <Form.Control as="select" type="" value={selectedIsLearning}
+                        onChange={(e) => setSelectedIsLearning(e.target.value)}>
                         {
                             languages.map((language) => (
-                                    <option value={language.languageName} key={language.languageName}>
-                                        {language.languageName}
-                                    </option>
+                                <option value={language.languageName} key={language._id}>
+                                    {language.languageName}
+                                </option>
                             ))
                         }
                     </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="dateOfBirth">
+                    <Form.Label>Date of birth</Form.Label>
+                    <Form.Control type="date" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} />
+                </Form.Group>
+                <Form.Group controlId="gender">
+                    <Form.Label>Gender</Form.Label>
+                    <Form.Control as="select" type="" value={gender} onChange={(e) => setGender(e.target.value)}>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Uknown">Unknown</option>
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="country">
+                    <Form.Label>Country you are in</Form.Label>
+                    <Form.Control as="select" type="" value={selectedCountry}
+                        onChange={(e) => setSelectedCountry(e.target.value)}>
+                        {
+                            countries.map((country, _id) => (
+                                <option value={country.countryName} key={country._id}>
+                                    {country.countryName}
+                                </option>
+                            ))
+                        }
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="city">
+                    <Form.Label>City you are in</Form.Label>
+                    <Form.Control as="select" type="" value={selectedCity}
+                        onChange={(e) => setSelectedCity(e.target.value)}>
+                        {
+                            cities.map((city, _id) => (
+                                <option value={city.cityName} key={city._id}>
+                                    {city.cityName}
+                                </option>
+                            ))
+                        }
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="introduction">
+                    <Form.Label>Introduction</Form.Label>
+                    <Form.Control
+                        as="textarea"
+                        style={{ height: '100px' }}
+                        value={introduction} onChange={(e) => setIntroduction(e.target.value)}
+                    />
                 </Form.Group>
                 <Button variant="primary" type="submit">Next</Button>
             </Form>
