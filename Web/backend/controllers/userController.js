@@ -18,6 +18,45 @@ const getUserProfile = asyncHandler(async(req, res) => {
     };
 })
 
+const getCurrentUserProfile = asyncHandler(async(req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if(user) {
+        res.json({
+            _id: user._id,
+            knownAs: user.knownAs,
+            username: user.username,
+            token: generateToken(user._id),
+        });
+    } else {
+        res.status(404).json({message: 'User not found'});
+    };
+})
+
+const updateCurrentUserProfile = asyncHandler(async(req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if(user) {
+        user.username = req.body.username || user.userna
+        user.nativeLanguage = req.body.nativeLanguage || user.nativeLanguage;
+        user.isLearning = req.body.isLearning || user.isLearning;
+        if(req.body.password) {
+            user.password = req.body.password;
+        }
+
+        const updatedUser = await user.save();
+
+        res.json({
+            _id: updatedUser._id,
+            knownAs: updatedUser.knownAs,
+            username: updatedUser.username,
+            token: generateToken(updatedUser._id),
+        });
+    } else {
+        res.status(404).json({message: 'User not found'});
+    };
+})
+
 const authUser = asyncHandler(async(req, res) => {
     const { username, password } = req.body;
 
@@ -67,6 +106,8 @@ const registerUser = asyncHandler(async(req, res) => {
 export {
     getUsers,
     getUserProfile,
+    getCurrentUserProfile,
     authUser,
-    registerUser
+    registerUser,
+    updateCurrentUserProfile,
 }

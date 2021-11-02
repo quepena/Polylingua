@@ -11,7 +11,7 @@ const UsersScreen = () => {
 
     useEffect(() => {
         const fetchUsers = async () => {
-            const { data } = await axios.get('/api/users');
+            const { data } = await axios.get('/api/users/users');
             setUsers(data);
         }
 
@@ -25,15 +25,17 @@ const UsersScreen = () => {
                     <FormControl placeholder="Find a user" />
                     <Button variant="success"><FontAwesomeIcon className="mx-2" icon={faSearch}></FontAwesomeIcon></Button>
                 </InputGroup>
-                <Col style={{ display: 'flex', justifyContent: 'left', alignItems: 'center', flexWrap: 'wrap' }}>
-                    {
-                        users.map((user) => (
-                            <Col key={user.id}>
-                                <User user={user} />
-                            </Col>
-                        ))
-                    }
-                </Col>
+            </Row>
+            <Row style={{display: 'flex', juctifyContent: 'center', alignItems: 'center', flexWrap: 'wrap'}}>
+                {
+                    users.map((user) => (
+                        <Card style={{width: '25%', margin: '2%'}} key={user._id}>
+                            <Card.Body>
+                                <Card.Title>{user.username}</Card.Title>
+                            </Card.Body>
+                        </Card>
+                    ))
+                }
             </Row>
         </Container>
     )

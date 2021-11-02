@@ -2,7 +2,7 @@ import React from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Container, Nav, NavDropdown, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { logout } from '../actions/userActions';
 
 const Header = () => {
@@ -23,7 +23,7 @@ const Header = () => {
                     <Row>
                         <Col sm={5}>
                             {/* <Image src="/images/polylingua.png"></Image> */}
-                            <Navbar.Brand href="#home">Polylingua</Navbar.Brand>
+                            <LinkContainer to="/"><Navbar.Brand>Polylingua</Navbar.Brand></LinkContainer>
                         </Col>
                         <Col sm={5}>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -47,9 +47,9 @@ const Header = () => {
                             {/* <NavDropdown title="My Account" id="basic-nav-dropdown"> */}
                             {userInfo ? (
                                 <NavDropdown title={"Hello, "+userInfo.knownAs.charAt(0).toUpperCase()+userInfo.knownAs.slice(1)} id='name'>
-                                    {/* <LinkContainer to="users/profile"></LinkContainer> */}
+                                    <LinkContainer to="/profile"><NavDropdown.Item>Profile</NavDropdown.Item></LinkContainer>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item>Edit profile</NavDropdown.Item>
+                                    <LinkContainer to="/profile/edit"><NavDropdown.Item>Edit profile</NavDropdown.Item></LinkContainer>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                                 </NavDropdown>
