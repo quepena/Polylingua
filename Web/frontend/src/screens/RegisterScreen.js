@@ -122,6 +122,7 @@ const RegisterScreen = ({ location, history }) => {
                                 </option>
                             ))
                         }
+                        <option value="" selected disabled hidden>Select a language</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="isLearning">
@@ -135,6 +136,7 @@ const RegisterScreen = ({ location, history }) => {
                                 </option>
                             ))
                         }
+                        <option value="" selected disabled hidden>Select a language</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="dateOfBirth">
@@ -144,6 +146,7 @@ const RegisterScreen = ({ location, history }) => {
                 <Form.Group controlId="gender">
                     <Form.Label>Gender</Form.Label>
                     <Form.Control as="select" type="" value={gender} onChange={(e) => setGender(e.target.value)}>
+                        <option value="" selected disabled hidden>Select your gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Uknown">Unknown</option>
@@ -160,6 +163,7 @@ const RegisterScreen = ({ location, history }) => {
                                 </option>
                             ))
                         }
+                        <option value="" selected disabled hidden>Select a country</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="city">
@@ -173,6 +177,7 @@ const RegisterScreen = ({ location, history }) => {
                                 </option>
                             ))
                         }
+                        <option value="" selected disabled hidden>Select a city</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="introduction">
