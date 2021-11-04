@@ -14,6 +14,9 @@ import {
     USER_UPDATE_PROFILE_SUCCESS,
     USER_UPDATE_PROFILE_FAIL,
     USER_UPDATE_PROFILE_RESET,
+    USER_DELETE_PROFILE_REQUEST,
+    USER_DELETE_PROFILE_SUCCESS,
+    USER_DELETE_PROFILE_FAIL,
 } from "../constants/userConstants"
 
 export const login = (username, password) => async (dispatch) => {
@@ -142,4 +145,31 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
+}
+
+export const deleteUserAccount = (id) => async (dispatch, getState) => {
+    // try {
+    //     dispatch({
+    //         type: USER_DELETE_PROFILE_REQUEST
+    //     })
+
+    //     const { userLogin: { userInfo } } = getState();
+
+    //     const config = {
+    //         headers: {
+    //             Authorization: `Bearer ${userInfo.token}`
+    //         }
+    //     }
+
+    //     const { data } = await axios.delete(`/api/users/users/${id}`, config);
+
+    //     dispatch({
+    //         type: USER_DELETE_PROFILE_SUCCESS,
+    //     })
+    // } catch (error) {
+    //     dispatch({
+    //         type: USER_DELETE_PROFILE_FAIL,
+    //         payload: error.response && error.response.data.message ? error.response.data.message : error.message
+    //     })
+    // }
 }

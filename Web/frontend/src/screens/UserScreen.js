@@ -1,5 +1,5 @@
 import React from 'react'
-import { getUserDetails, updateUserProfile } from '../actions/userActions'
+import { getUserDetails, updateUserProfile, deleteUserAccount } from '../actions/userActions'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
@@ -8,6 +8,8 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 const UserScreen = ({ location, history }) => {
+    const dispatch = useDispatch();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -15,8 +17,6 @@ const UserScreen = ({ location, history }) => {
 
     const [selectedNativeLanguage, setSelectedNativeLanguage] = useState('');
     const [selectedIsLearning, setSelectedIsLearning] = useState('');
-
-    const dispatch = useDispatch();
 
     const userDetails = useSelector(state => state.userDetails);
     const { loading, error, user } = userDetails;
@@ -26,6 +26,9 @@ const UserScreen = ({ location, history }) => {
 
     const userUpdateProfile = useSelector(state => state.userUpdateProfile);
     const { success } = userUpdateProfile;
+
+    const userDeleteProfile = useSelector(state => state.userDeleteProfile);
+    const { success: successDelete } = userDeleteProfile;
 
     useEffect(() => {
         if (!userInfo) {
@@ -37,7 +40,12 @@ const UserScreen = ({ location, history }) => {
                 setUsername(user.username)
             }
         }
-    }, [dispatch, history, userInfo, user])
+    }, [dispatch, history, userInfo, user, successDelete])
+
+    const deleteHandler = (e, id) => {
+        e.preventDefault();
+        dispatch(deleteUserAccount(id));
+    }
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -100,6 +108,9 @@ const UserScreen = ({ location, history }) => {
                     </Form.Control>
                 </Form.Group> */}
                 <Button variant="primary" type="submit">Update profile</Button>
+            </Form>
+            <Form onSubmit={deleteHandler}>
+                <Button variant="danger" type="submit">Delete account</Button>
             </Form>
         </FormContainer>
     )

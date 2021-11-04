@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import UserScreen from './screens/UserScreen';
+import UserProfileScreen from './screens/UserProfileScreen';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/login" component={LoginScreen}></Route>
       <Route path="/register" component={RegisterScreen}></Route>
       <Route path="/profile/edit" component={UserScreen}></Route>
+      {/* <Route path="/profile/edit" component={UserProfileScreen}></Route> */}
     </Router>
   );
 }

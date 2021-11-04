@@ -37,7 +37,7 @@ const updateCurrentUserProfile = asyncHandler(async(req, res) => {
     const user = await User.findById(req.user._id);
 
     if(user) {
-        user.username = req.body.username || user.userna
+        user.username = req.body.username || user.username
         user.nativeLanguage = req.body.nativeLanguage || user.nativeLanguage;
         user.isLearning = req.body.isLearning || user.isLearning;
         if(req.body.password) {
@@ -103,6 +103,17 @@ const registerUser = asyncHandler(async(req, res) => {
     }
 })
 
+const deleteCurrentUserAccount = asyncHandler(async(req, res) => {
+    const user = await User.findById(req.params._id);
+
+    if(user) {
+        await user.remove();
+        res.json({ messsage: 'User removed' })
+    } else {
+        res.status(404).json({message: 'User not found'});
+    };
+})
+
 export {
     getUsers,
     getUserProfile,
@@ -110,4 +121,5 @@ export {
     authUser,
     registerUser,
     updateCurrentUserProfile,
+    deleteCurrentUserAccount
 }
