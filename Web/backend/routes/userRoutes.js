@@ -5,7 +5,7 @@ import { protect } from '../middleware/authMiddleware.js';
 
 router.route('/').post(registerUser);
 
-router.route('/users').get(getUsers);
+router.route('/users').get(protect, getUsers);
 
 router.route('/users/profile').get(protect, getCurrentUserProfile).put(protect, updateCurrentUserProfile)
 

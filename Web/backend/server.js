@@ -5,6 +5,7 @@ import userRoutes from './routes/userRoutes.js'
 import languageRoutes from './routes/languageRoutes.js'
 import countryRoutes from './routes/countryRoutes.js'
 import cityRoutes from './routes/cityRoutes.js'
+import adminRoutes from './routes/adminRoutes.js'
 
 dotenv.config();
 
@@ -25,5 +26,7 @@ app.use('/api/languages', languageRoutes);
 app.use('/api/countries', countryRoutes);
 
 app.use('/api/cities', cityRoutes);
+
+app.use('/api/admin', adminRoutes);
 
 app.listen(5000, console.log('Server'));

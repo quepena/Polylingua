@@ -9,6 +9,7 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import UserScreen from './screens/UserScreen';
 import UserProfileScreen from './screens/UserProfileScreen';
+import AdminUsersScreen from './screens/AdminUsersScreen';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/register" component={RegisterScreen}></Route>
       <Route path="/profile/edit" component={UserScreen}></Route>
       {/* <Route path="/profile/edit" component={UserProfileScreen}></Route> */}
+      <Route path="/admin/users" component={AdminUsersScreen}></Route>
     </Router>
   );
 }
