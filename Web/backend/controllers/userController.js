@@ -26,6 +26,7 @@ const getCurrentUserProfile = asyncHandler(async(req, res) => {
             _id: user._id,
             knownAs: user.knownAs,
             username: user.username,
+            nativeLanguage: user.nativeLanguage,
             token: generateToken(user._id),
         });
     } else {
@@ -39,7 +40,7 @@ const updateCurrentUserProfile = asyncHandler(async(req, res) => {
     if(user) {
         user.username = req.body.username || user.username
         user.nativeLanguage = req.body.nativeLanguage || user.nativeLanguage;
-        user.isLearning = req.body.isLearning || user.isLearning;
+        // user.isLearning = req.body.isLearning || user.isLearning;
         if(req.body.password) {
             user.password = req.body.password;
         }

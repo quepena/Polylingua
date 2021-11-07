@@ -6,10 +6,10 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 const MessageScreen = () => {
     return (
         <div>
-            {/* <Container>
+            <Container>
                 <Card>
                     <Card.Body>
-                        <Row md={10}>
+                        {/* <Row md={10}>
                             <Col xs={4}>
                                 <Card style={{backgroundColor: 'lightgray'}}>
                                     <Card.Body>
@@ -37,10 +37,14 @@ const MessageScreen = () => {
                                     <Form.Control className="mx-2" as="textarea" style={{borderLeft: 'none'}} placeholder="Write a message here" />
                                 </Card>
                             </Col>
+                        </Row> */}
+                        <Row>
+                            <Col md={3}>Friends</Col>
+                            <Col md={9}>Message</Col>
                         </Row>
                     </Card.Body>
                 </Card>
-            </Container> */}
+            </Container>
         </div>
     )
 }

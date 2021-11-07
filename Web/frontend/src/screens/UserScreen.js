@@ -6,6 +6,7 @@ import FormContainer from "../components/FormContainer";
 import { Form, Button } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import axios from 'axios';
 
 const UserScreen = ({ location, history }) => {
     const dispatch = useDispatch();
@@ -13,10 +14,10 @@ const UserScreen = ({ location, history }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [message, setMessage] = useState(null);
+    // const [languages, setLanguage] = useState([]);
 
-    const [selectedNativeLanguage, setSelectedNativeLanguage] = useState('');
-    const [selectedIsLearning, setSelectedIsLearning] = useState('');
+    // const [selectedNativeLanguage, setSelectedNativeLanguage] = useState('');
+    const [message, setMessage] = useState(null);
 
     const userDetails = useSelector(state => state.userDetails);
     const { loading, error, user } = userDetails;
@@ -40,6 +41,11 @@ const UserScreen = ({ location, history }) => {
                 setUsername(user.username)
             }
         }
+        // const fetchLanguages = async () => {
+        //     const { data } = await axios.get('/api/languages');
+        //     setLanguage(data)
+        // };
+        // fetchLanguages();
     }, [dispatch, history, userInfo, user, successDelete])
 
     const deleteHandler = (e, id) => {
@@ -92,9 +98,10 @@ const UserScreen = ({ location, history }) => {
                                 </option>
                             ))
                         }
+                        <option value="" selected disabled hidden>Select a language</option>
                     </Form.Control>
-                </Form.Group>
-                <Form.Group controlId="isLearning">
+                </Form.Group> */}
+                {/* <Form.Group controlId="isLearning">
                     <Form.Label>Language you want to learn</Form.Label>
                     <Form.Control as="select" type="" value={selectedIsLearning}
                         onChange={(e) => setSelectedIsLearning(e.target.value)}>

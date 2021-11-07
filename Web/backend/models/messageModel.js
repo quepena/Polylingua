@@ -7,14 +7,16 @@ const messageSchema = new mongoose.Schema({
         required: true
     },
     participants: [{
-        type: mongoose.Schema.Types.ObjectId,
+        // type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
-        ref: 'User' 
+        // ref: 'User' 
     }],
     sender: {
-        type: mongoose.Schema.Types.ObjectId,
+        // type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
-        ref: 'User'
+        // ref: 'User'
     },
     date: {
         type: Date,
