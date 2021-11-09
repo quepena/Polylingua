@@ -26,6 +26,7 @@ const RegisterScreen = ({ location, history }) => {
     const [selectedIsLearning, setSelectedIsLearning] = useState('');
     const [selectedCountry, setSelectedCountry] = useState('');
     const [selectedCity, setSelectedCity] = useState('');
+    const [age, setAge] = useState('');
 
     const dispatch = useDispatch();
 
@@ -54,12 +55,47 @@ const RegisterScreen = ({ location, history }) => {
             setCity(data)
         };
         fetchCities();
+        
     }, [history, userInfo, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault();
+        const calculateAge = async(dateOfBirth) => {
+            var diff_ms = Date.now() - dateOfBirth;
+            var age_dt = new Date(diff_ms);
+            var age = Math.abs(age_dt.getUTCFullYear() - 1970)
+            setAge(age)
+        }
+        calculateAge(dateOfBirth);
         if (password !== confirmPassword) {
             setMessage('Passwords don\'t match');
+        }
+        else if(!selectedNativeLanguage) {
+            setMessage('Select your native language please!');
+        }
+        else if(!selectedIsLearning) {
+            setMessage('Select a language you are learning please!');
+        }
+        else if(selectedNativeLanguage === selectedIsLearning) {
+            setMessage('Native language and the language you are learning can\'t be similar');
+        }
+        else if(!dateOfBirth) {
+            setMessage('Choose your date of birth please!')
+        }
+        else if(age<13) {
+            setMessage('You must be older than 13');
+        }
+        else if(!gender) {
+            setMessage('Select your gender please!');
+        } 
+        else if(!selectedCountry) {
+            setMessage('Select your country please!');
+        } 
+        else if(!selectedCity) {
+            setMessage('Select your city please!');
+        }
+        else if(!introduction) {
+                setMessage('Enter your introduction please!');
         } else {
             dispatch(register(username, password, knownAs, selectedNativeLanguage, selectedIsLearning, dateOfBirth, gender, selectedCountry, selectedCity, introduction));
             // dispatch(register(username, password, knownAs))
