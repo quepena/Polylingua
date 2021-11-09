@@ -2,17 +2,17 @@ import Message from "../models/messageModel.js";
 import asyncHandler from 'express-async-handler';
 
 const createMessage = asyncHandler(async(req, res) => {
-    const { sender, participants, contents } = req.body;
+    const { conversationId, sender, contents } = req.body;
 
     const newMessage = await Message.create({
-        sender, participants, contents
+        conversationId, sender, contents
     })
 
     if(newMessage) {
         res.status(201).json({
             _id: newMessage._id,
+            conversationId: newMessage.conversationId,
             sender: newMessage.sender,
-            participants: newMessage.participants,
             contents: newMessage.contents,
         })
     } else {
@@ -26,4 +26,12 @@ const getMessages = asyncHandler(async(req, res) => {
     res.json(messages);
 })
 
-export { getMessages, createMessage };
+const getMessageByConversation = asyncHandler(async (req, res) => {
+    const message = await Message.find({
+        conversationId: req.params.conversation
+    })
+
+    res.json(message);
+})
+
+export { getMessages, createMessage, getMessageByConversation };

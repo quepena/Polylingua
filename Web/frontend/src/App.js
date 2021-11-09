@@ -23,6 +23,7 @@ function App() {
       <Route path="/profile/edit" component={UserScreen}></Route>
       {/* <Route path="/profile/edit" component={UserProfileScreen}></Route> */}
       <Route path="/admin/users" component={AdminUsersScreen}></Route>
+      <Route path="/users/:id" component={UserProfileScreen} />
     </Router>
   );
 }

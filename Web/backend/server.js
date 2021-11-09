@@ -7,6 +7,7 @@ import countryRoutes from './routes/countryRoutes.js'
 import cityRoutes from './routes/cityRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import messageRoutes from './routes/messageRoutes.js'
+import conversationRoutes from './routes/conversationRoutes.js'
 
 dotenv.config();
 
@@ -31,5 +32,7 @@ app.use('/api/cities', cityRoutes);
 app.use('/api/admin', adminRoutes);
 
 app.use('/api/messages', messageRoutes);
+
+app.use('/api/conversations', conversationRoutes);
 
 app.listen(5000, console.log('Server'));
