@@ -2,19 +2,14 @@ import mongoose from 'mongoose'
 
 const sectionSchema = new mongoose.Schema({
     languageId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
-        ref: 'Language'
     },
     posts: [{
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Post' 
+       type: Array
     }],
     subscribers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User' 
+        type: Array
     }],
     numberOfSubscribers: {
         type: Number,

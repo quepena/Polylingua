@@ -12,18 +12,15 @@ const postSchema = new mongoose.Schema({
         required: true
     },
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
-        ref: 'User'
     },
     sectionId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
-        ref: 'Section'
     },
     comments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comment'
+        type: Array
     }],
     numberOfComments: {
         type: Number,

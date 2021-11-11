@@ -20,6 +20,7 @@ const MessageScreen = ({ history }) => {
     const [messages, setMessages] = useState([]);
 
     const [newMessage, setNewMessage] = useState('');
+    const [arrivedMessage, setArrivedMessage] = useState(null);
 
     const socket = useRef();
 
@@ -37,10 +38,23 @@ const MessageScreen = ({ history }) => {
     useEffect(() => {
         if (userInfo) {
             socket.current = io("ws:localhost:8900");
+            socket.current.on("getMessage", data => {
+                setArrivedMessage({
+                    sender: data.sender,
+                    contents: data.contents,
+                    date: Date.now(),
+                })
+            })
         } else {
             history.push('/login');
         }
     }, [userInfo])
+
+    useEffect(() => {
+        arrivedMessage && currentConversation?.arrivalMessage.sender &&
+        setMessages(prev => [...prev, arrivedMessage])
+
+    }, [arrivedMessage, currentConversation])
 
     useEffect(() => {
         if (userInfo) {
@@ -64,6 +78,18 @@ const MessageScreen = ({ history }) => {
             history.push('/login');
         }
     }, [dispatch, history, userInfo, conversations])
+
+
+    //dlya userov sboku
+
+    // useEffect(() => {
+    //     const friend = conversations.participants.find((p) => p !== userInfo._id)
+
+    //     const fetchUsers = async () => {
+    //         const res = await axios(`/api/users/users/${friend}`);
+    //     } 
+    //     fetchUsers();
+    // }, [userInfo, conversations])
 
     useEffect(() => {
         if (userInfo) {
@@ -93,6 +119,15 @@ const MessageScreen = ({ history }) => {
             conversationId: currentConversation._id,
 
         }
+
+        const reciever = currentConversation.reciever
+
+        socket.current.emit("sendMessage", {
+            sender: userInfo._id, 
+            reciever, 
+            contents: newMessage
+        })
+
         const res = await axios.post('/api/messages', message, config)
         setMessages([...messages, res.data])
     }
@@ -139,7 +174,7 @@ const MessageScreen = ({ history }) => {
                                             setCurrentConversation(conversation);
                                         }}>
                                             <Card.Body>
-                                                <Card.Title>{conversation.reciever}</Card.Title>
+                                                <Card.Title>{conversation.participants}</Card.Title>
                                                 {/* <LinkContainer to={`/admin/user/${user._id}/edit`}><Button variant="light">Edit account</Button></LinkContainer>
                                                 <Button variant="danger" onClick={() => deleteHandler(user._id)}>Delete account</Button> */}
                                             </Card.Body>

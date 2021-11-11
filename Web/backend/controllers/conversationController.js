@@ -4,17 +4,16 @@ import Conversation from "../models/conversationModel.js";
 import User from "../models/userModel.js";
 
 const createConversation = asyncHandler(async (req, res) => {
-    const { sender, reciever } = req.body;
+    // const { participants } = req.body;
 
     const newConversation = await Conversation.create({
-        sender, reciever
+        participants: [req.body.sender, req.body.reciever]
     })
 
     if (newConversation) {
         res.status(201).json({
             _id: newConversation._id,
-            sender: newConversation.sender,
-            reciever: newConversation.reciever,
+            participants: newConversation.participants,
         })
     } else {
         res.status(400).json({ message: "Invalid conversation data" });
@@ -29,7 +28,7 @@ const getConversations = asyncHandler(async (req, res) => {
 
 const getConversationByUser = asyncHandler(async (req, res) => {
     const conversation = await Conversation.find({
-        sender: req.params.userId
+        participants: { $in: [req.params.userId] }
     })
 
     res.json(conversation);

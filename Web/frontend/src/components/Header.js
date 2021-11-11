@@ -23,7 +23,7 @@ const Header = () => {
                     <Row>
                         <Col sm={5}>
                             {/* <Image src="/images/polylingua.png"></Image> */}
-                            <LinkContainer to="/"><Navbar.Brand>Polylingua</Navbar.Brand></LinkContainer>
+                            <LinkContainer to="/users"><Navbar.Brand>Polylingua</Navbar.Brand></LinkContainer>
                         </Col>
                         <Col sm={5}>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -35,7 +35,7 @@ const Header = () => {
                                     <LinkContainer to="/messages">
                                         <Nav.Link>Messages</Nav.Link>
                                     </LinkContainer>
-                                    <LinkContainer to="/">
+                                    <LinkContainer to="/blogs">
                                         <Nav.Link>Blog</Nav.Link>
                                     </LinkContainer>
                                 </Nav>
@@ -59,7 +59,7 @@ const Header = () => {
                             }
                             {userInfo && userInfo.isAdmin && (
                                 <NavDropdown title={"Admin "} id='adminmenu'>
-                                    <LinkContainer to="admin/users"><NavDropdown.Item>Users</NavDropdown.Item></LinkContainer>
+                                    <LinkContainer to="/admin/users"><NavDropdown.Item>Users</NavDropdown.Item></LinkContainer>
                                     {/* <NavDropdown.Divider /> */}
                                     {/* <LinkContainer to="/profile/edit"><NavDropdown.Item>Edit profile</NavDropdown.Item></LinkContainer>
                                     <NavDropdown.Divider /> */}

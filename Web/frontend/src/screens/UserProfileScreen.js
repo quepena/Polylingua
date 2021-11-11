@@ -6,35 +6,30 @@ import User from '../components/User';
 import axios from 'axios';
 import users from '../users';;
 
-const UserProfileScreen = () => {
-    const [user, setUser] = useState('');
+const UserProfileScreen = ({ match }) => {
+    const [user, setUser] = useState({});
 
     useEffect(() => {
-        const fetchUser = async (id) => {
-            const res = await axios.get(`/api/users/${id}`);
+        const fetchUser = async () => {
+            const res = await axios.get(`/api/users/users/${match.params.id}`);
             setUser(res.data);
         }
-
-        fetchUser(user._id);
+        fetchUser();
     }, [])
 
     return (
         <Container>
-            <Row>
+            {/* <Row>
                 <InputGroup className="my-5">
                     <FormControl placeholder="Find a user" />
                     <Button variant="success"><FontAwesomeIcon className="mx-2" icon={faSearch}></FontAwesomeIcon></Button>
                 </InputGroup>
-            </Row>
+            </Row> */}
             <Row style={{display: 'flex', juctifyContent: 'center', alignItems: 'center', flexWrap: 'wrap'}}>
                 {
-                    users.map((user) => (
-                        <Card style={{width: '25%', margin: '2%'}} key={user._id}>
-                            <Card.Body>
-                                <Card.Title>{user.username}</Card.Title>
-                            </Card.Body>
-                        </Card>
-                    ))
+                    <Card>
+                        <Card.Title>{user.username}</Card.Title>
+                    </Card>
                 }
             </Row>
         </Container>

@@ -27,6 +27,7 @@ const getCurrentUserProfile = asyncHandler(async(req, res) => {
             knownAs: user.knownAs,
             username: user.username,
             nativeLanguage: user.nativeLanguage,
+            isLearning: user.isLearning,
             token: generateToken(user._id),
         });
     } else {
@@ -74,6 +75,7 @@ const authUser = asyncHandler(async(req, res) => {
             _id: user._id,
             knownAs: user.knownAs,
             username: user.username,
+            isLearning: user.isLearning,
             isAdmin: user.isAdmin,
             token: generateToken(user._id),
         });
@@ -98,6 +100,7 @@ const registerUser = asyncHandler(async(req, res) => {
             _id: user._id,
             knownAs: user.knownAs,
             username: user.username,
+            isLearning: user.isLearning,
             token: generateToken(user._id),
         })
     } else {

@@ -43,12 +43,14 @@ const UsersScreen = () => {
             <Row style={{ display: 'flex', juctifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
                 {
                     users.map((user) => (
-                        <Card style={{ width: '25%', margin: '2%' }} key={user._id}>
-                            <Card.Body>
-                                <Card.Title>{user.username}</Card.Title>
-                                <LinkContainer to={"/users/"+user._id}><Button>Go to profile</Button></LinkContainer>
-                            </Card.Body>
-                        </Card>
+                        <LinkContainer to={`/users/${user._id}`}>
+                            <Card style={{ width: '25%', margin: '2%' }} key={user._id}>
+                                <Card.Body>
+                                    <Card.Title>{user.username}</Card.Title>
+                                    <Button>Go to profile</Button>
+                                </Card.Body>
+                            </Card>
+                        </LinkContainer>
                     ))
                 }
             </Row>

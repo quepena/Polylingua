@@ -1,13 +1,9 @@
 import mongoose from 'mongoose'
 
 const conversationSchema = new mongoose.Schema({
-    sender: {
-        type: String,
-        required: true
-    },
-    reciever: {
-        type: String,
-        required: true
+    participants: {
+        type: Array,
+        required: true,
     }
 }, {
     timestamps: true,

@@ -16,14 +16,13 @@ function App() {
     <Router>
       <Header />
       <Route path='/messages' component={MessageScreen} exact />
-      <Route path='/' component={BlogScreen} exact />
-      <Route path='/users' component={UsersScreen} />
-      <Route path="/login" component={LoginScreen}></Route>
-      <Route path="/register" component={RegisterScreen}></Route>
-      <Route path="/profile/edit" component={UserScreen}></Route>
-      {/* <Route path="/profile/edit" component={UserProfileScreen}></Route> */}
-      <Route path="/admin/users" component={AdminUsersScreen}></Route>
-      <Route path="/users/:id" component={UserProfileScreen} />
+      <Route path='/blogs' component={BlogScreen} exact />
+      <Route path='/users' component={UsersScreen} exact />
+      <Route path="/login" component={LoginScreen} exact ></Route>
+      <Route path="/register" component={RegisterScreen} exact ></Route>
+      <Route path="/profile/edit" component={UserScreen} exact></Route>
+      <Route path="/admin/users" component={AdminUsersScreen} exact></Route>
+      <Route path="/users/:id" component={UserProfileScreen}/>
     </Router>
   );
 }

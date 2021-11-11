@@ -25,14 +25,12 @@ const userSchema = new mongoose.Schema({
         ref: 'Language',
     },
     alsoSpeaks: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Language',
+        type: String
     },
     isLearning: {
         // type: mongoose.Schema.Types.ObjectId,
         type: String,
         required: true,
-        ref: 'Language',
     },
     dateOfBirth: {
         type: Date,

@@ -1,11 +1,12 @@
-/* .chatMessageOwn {
+.chatMessageOwn {
     width: 80%;
     right: 0 auto;
+    color: orange;
 }
 
 .chatMessage {
     color: violet;
-} */
+}
 
 .chatBoxWrapper {
     display: flex;
