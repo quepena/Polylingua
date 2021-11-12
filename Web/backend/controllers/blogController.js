@@ -31,14 +31,6 @@ const getPostsBySection = asyncHandler(async (req, res) => {
     res.json(posts);
 })
 
-const getSectionByUser = asyncHandler(async (req, res) => {
-    const section = await User.find({
-        sectionId: req.params.isLearning
-    })
-
-    res.json(section);
-})
-
 // const getConversationByUser = asyncHandler(async (req, res) => {
 //     const conversation = await Conversation.find({
 //         participants: { $in: [req.params.userId] }
@@ -47,4 +39,4 @@ const getSectionByUser = asyncHandler(async (req, res) => {
 //     res.json(conversation);
 // })
 
-export { getPostsBySection, createPost, getSectionByUser };
+export { getPostsBySection, createPost };

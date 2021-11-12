@@ -23,13 +23,13 @@ const Header = () => {
                     <Row>
                         <Col sm={5}>
                             {/* <Image src="/images/polylingua.png"></Image> */}
-                            <LinkContainer to="/users"><Navbar.Brand>Polylingua</Navbar.Brand></LinkContainer>
+                            <LinkContainer to="/"><Navbar.Brand>Polylingua</Navbar.Brand></LinkContainer>
                         </Col>
                         <Col sm={5}>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="basic-navbar-nav">
                                 <Nav className="me-auto">
-                                    <LinkContainer to="/users">
+                                    <LinkContainer to="/">
                                         <Nav.Link>Friends</Nav.Link>
                                     </LinkContainer>
                                     <LinkContainer to="/messages">

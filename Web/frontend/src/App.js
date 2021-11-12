@@ -10,6 +10,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import UserScreen from './screens/UserScreen';
 import UserProfileScreen from './screens/UserProfileScreen';
 import AdminUsersScreen from './screens/AdminUsersScreen';
+import BlogSectionScreen from './screens/BlogSectionScreen';
 
 function App() {
   return (
@@ -17,12 +18,14 @@ function App() {
       <Header />
       <Route path='/messages' component={MessageScreen} exact />
       <Route path='/blogs' component={BlogScreen} exact />
-      <Route path='/users' component={UsersScreen} exact />
+      <Route path='/blogs/:id' component={BlogSectionScreen} />
+      <Route path='/' component={UsersScreen} exact />
       <Route path="/login" component={LoginScreen} exact ></Route>
       <Route path="/register" component={RegisterScreen} exact ></Route>
       <Route path="/profile/edit" component={UserScreen} exact></Route>
       <Route path="/admin/users" component={AdminUsersScreen} exact></Route>
-      <Route path="/users/:id" component={UserProfileScreen}/>
+      <Route path="/:id" component={UserProfileScreen}/>
+      <Route path="/search/:keyword" component={UsersScreen}/>
     </Router>
   );
 }

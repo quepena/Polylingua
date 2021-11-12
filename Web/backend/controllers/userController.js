@@ -3,7 +3,14 @@ import asyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateToken.js';
 
 const getUsers = asyncHandler(async(req, res) => {
-    const users = await User.find({})
+    const keyword = req.query.keyword ? {
+        username: {
+            $regex: req.query.keyword,
+            $options: 'i'
+        }
+    } : {}
+
+    const users = await User.find({ ...keyword })
 
     res.json(users);
 })

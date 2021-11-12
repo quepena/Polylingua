@@ -4,17 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faComment, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const BlogScreen = () => {
     const dispatch = useDispatch();
 
-    const [languages, setLanguages] = useState([]);
-
-    const [sections, setSections] = useState([]);
-
     const [posts, setPosts] = useState([]);
-
-    const [newPost, setNewPost] = useState('');
 
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
@@ -30,29 +25,34 @@ const BlogScreen = () => {
 
     useEffect(() => {
         if (userInfo) {
-            const fetchSections = async (id) => {
-                const res = await axios.get(`/api/blogs/${id}`)
-                setSections(res.data)
+            const fetchPosts = async (id) => {
+                const { data } = await axios.get(`/api/blogs/${id}`);
+                setPosts(data);
             }
-            fetchSections(userInfo.isLearning);
+            fetchPosts(userInfo.isLearning);
         }
 
-    }, [sections])
+    }, [userInfo, posts])
 
     return (
         <div>
             <Container>
                 <Row>
                     <Col>
-                        <Form.Control as="textarea" placeholder="Write a new post" />
-                        <Button className="my-4" variant="success">Publish</Button>
                         <Card className="my-5">
                             <Card.Body>
-                                {/* {
-                                    sections.map((section) => (
-                                        <Card.title>{section.languageId}</Card.title>
+                                {
+                                    posts.map((post) => (
+                                        <Card key={post._id}>
+                                            <Card.Body>
+                                                <LinkContainer to={`/blogs/${post.sectionId}`}><Card.Header>{post.sectionId}</Card.Header></LinkContainer>
+                                                <Card.Title>{post.title}</Card.Title>
+                                                <Card.Text>{post.contents}</Card.Text>
+                                                <Button>Comment</Button>
+                                            </Card.Body>
+                                        </Card>
                                     ))
-                                } */}
+                                }
                             </Card.Body>
                         </Card>
                     </Col>

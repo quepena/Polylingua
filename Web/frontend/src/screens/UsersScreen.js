@@ -8,8 +8,10 @@ import users from '../users';
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from 'react-router-bootstrap'
 import UserProfileScreen from './UserProfileScreen';
+import SearchBox from '../components/SearchBox';
+import { Route } from 'react-router-dom';
 
-const UsersScreen = () => {
+const UsersScreen = ({ match }) => {
     const [users, setUsers] = useState([]);
 
     const userLogin = useSelector(state => state.userLogin);
@@ -21,24 +23,23 @@ const UsersScreen = () => {
         }
     }
 
+    const keyword = match.params.keyword
+
     useEffect(() => {
         if (userInfo) {
-            const fetchUsers = async () => {
-                const { data } = await axios.get('/api/users/users', config);
+            const fetchUsers = async (keyword = '') => {
+                const { data } = await axios.get(`/api/users/users?keyword=${keyword}`, config);
                 setUsers(data);
             }
 
-            fetchUsers();
+            fetchUsers(keyword);
         }
-    }, [])
+    }, [keyword])
 
     return (
         <Container>
             <Row>
-                <InputGroup className="my-5">
-                    <FormControl placeholder="Find a user" />
-                    <Button variant="success"><FontAwesomeIcon className="mx-2" icon={faSearch}></FontAwesomeIcon></Button>
-                </InputGroup>
+                <Route render={({ history }) => <SearchBox history={history} />} />
             </Row>
             <Row style={{ display: 'flex', juctifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
                 {
