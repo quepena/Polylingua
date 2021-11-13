@@ -6,33 +6,24 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 import { LinkContainer } from 'react-router-bootstrap';
 
-const BlogScreen = () => {
-    const dispatch = useDispatch();
-
+const BlogScreen = ({ history }) => {
     const [posts, setPosts] = useState([]);
 
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
 
-    // useEffect(() => {
-    //     const fetchLanguages = async () => {
-    //         const { data } = await axios.get('/api/languages');
-    //         setLanguages(data);
-    //     };
-    //     fetchLanguages();
-
-    // }, [languages, sections])
-
     useEffect(() => {
         if (userInfo) {
-            const fetchPosts = async (id) => {
-                const { data } = await axios.get(`/api/blogs/${id}`);
-                setPosts(data);
+            const fetchPosts = async (userId) => {
+                const res = await axios.get(`/api/blogs/${userId}`)
+                setPosts(res.data)
+                console.log(res.data);
             }
-            fetchPosts(userInfo.isLearning);
+            fetchPosts(userInfo._id);
+        } else {
+            history.push('/login');
         }
-
-    }, [userInfo, posts])
+    }, [history, userInfo, posts])
 
     return (
         <div>
@@ -42,7 +33,7 @@ const BlogScreen = () => {
                         <Card className="my-5">
                             <Card.Body>
                                 {
-                                    posts.map((post) => (
+                                    posts.map((post) => {
                                         <Card key={post._id}>
                                             <Card.Body>
                                                 <LinkContainer to={`/blogs/${post.sectionId}`}><Card.Header>{post.sectionId}</Card.Header></LinkContainer>
@@ -51,8 +42,10 @@ const BlogScreen = () => {
                                                 <Button>Comment</Button>
                                             </Card.Body>
                                         </Card>
-                                    ))
-                                }
+                                        // post.map((post2) => {
+                                        // })
+                                    })
+                            }
                             </Card.Body>
                         </Card>
                     </Col>

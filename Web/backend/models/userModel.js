@@ -22,14 +22,14 @@ const userSchema = new mongoose.Schema({
         // type: mongoose.Schema.Types.ObjectId,
         type: String,
         required: true,
-        ref: 'Language',
+        // ref: 'Language',
     },
     alsoSpeaks: {
         type: String
     },
     isLearning: {
         // type: mongoose.Schema.Types.ObjectId,
-        type: String,
+        type: Array,
         required: true,
     },
     dateOfBirth: {

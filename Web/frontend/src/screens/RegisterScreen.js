@@ -23,7 +23,7 @@ const RegisterScreen = ({ location, history }) => {
     const [introduction, setIntroduction] = useState('');
 
     const [selectedNativeLanguage, setSelectedNativeLanguage] = useState('');
-    const [selectedIsLearning, setSelectedIsLearning] = useState('');
+    const [selectedIsLearning, setSelectedIsLearning] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState('');
     const [selectedCity, setSelectedCity] = useState('');
     const [age, setAge] = useState('');
@@ -163,8 +163,9 @@ const RegisterScreen = ({ location, history }) => {
                 </Form.Group>
                 <Form.Group controlId="isLearning">
                     <Form.Label>Language you want to learn</Form.Label>
-                    <Form.Control as="select" type="" value={selectedIsLearning}
-                        onChange={(e) => setSelectedIsLearning(e.target.value)}>
+                    <Form.Control as="select" multiple value={selectedIsLearning} onChange={e => setSelectedIsLearning([].slice.call(e.target.selectedOptions).map(item => item.value))}>
+                    {/* <Form.Control as="select" type="" value={selectedIsLearning}
+                        onChange={(e) => setSelectedIsLearning(e.target.value)}> */}
                         {
                             languages.map((language) => (
                                 <option value={language.languageName} key={language._id}>

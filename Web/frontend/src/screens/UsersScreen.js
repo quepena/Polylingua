@@ -11,7 +11,7 @@ import UserProfileScreen from './UserProfileScreen';
 import SearchBox from '../components/SearchBox';
 import { Route } from 'react-router-dom';
 
-const UsersScreen = ({ match }) => {
+const UsersScreen = ({ match, history }) => {
     const [users, setUsers] = useState([]);
 
     const userLogin = useSelector(state => state.userLogin);
@@ -33,6 +33,8 @@ const UsersScreen = ({ match }) => {
             }
 
             fetchUsers(keyword);
+        } else {
+            history.push('/login');
         }
     }, [keyword])
 

@@ -22,7 +22,7 @@ const getUserProfile = asyncHandler(async(req, res) => {
         res.json(user)
     } else {
         res.status(404).json({message: 'User not found'});
-    };
+    }
 })
 
 const getCurrentUserProfile = asyncHandler(async(req, res) => {
@@ -133,5 +133,5 @@ export {
     authUser,
     registerUser,
     updateCurrentUserProfile,
-    deleteCurrentUserAccount
+    deleteCurrentUserAccount,
 }

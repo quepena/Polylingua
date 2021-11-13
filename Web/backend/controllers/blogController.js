@@ -13,9 +13,9 @@ const createPost = asyncHandler(async (req, res) => {
     if (newPost) {
         res.status(201).json({
             _id: newPost._id,
-            title: newPost.title, 
-            contents: newPost.contents, 
-            userId: newPost.userId, 
+            title: newPost.title,
+            contents: newPost.contents,
+            userId: newPost.userId,
             sectionId: newPost.sectionId
         })
     } else {
@@ -24,12 +24,32 @@ const createPost = asyncHandler(async (req, res) => {
 })
 
 const getPostsBySection = asyncHandler(async (req, res) => {
-    const posts = await Post.find({
-        sectionId: req.params.sectionId
-    })
+    const currentUser = await User.findById(req.params.userId);
 
-    res.json(posts);
+    const sectionPosts = await Promise.all(
+        currentUser.isLearning.map((lang) => {
+            return Post.find({ sectionId: lang })
+        })
+    )
+
+    res.json(sectionPosts);
 })
+
+// const getPostsByUser = asyncHandler(async (req, res) => {
+//     const usersSections = User.find({
+//         isLearning: { $in: [req.params.isLearning] }
+//     })
+
+//     const posts = await Post.find({
+//         sectionId: req.params.usersSections
+//     })
+
+//     if (posts) {
+//         res.json(posts);
+//     } else {
+//         res.status(404).json({ message: 'Posts not found' });
+//     }
+// })
 
 // const getConversationByUser = asyncHandler(async (req, res) => {
 //     const conversation = await Conversation.find({
@@ -39,4 +59,4 @@ const getPostsBySection = asyncHandler(async (req, res) => {
 //     res.json(conversation);
 // })
 
-export { getPostsBySection, createPost };
+export { createPost, getPostsBySection };
