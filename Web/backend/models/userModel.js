@@ -80,8 +80,9 @@ const userSchema = new mongoose.Schema({
         ref: 'Photo'
     }],
     posts: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post'
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: 'Post'
+        type: Array
     }],
     comments: [{
         type: mongoose.Schema.Types.ObjectId,

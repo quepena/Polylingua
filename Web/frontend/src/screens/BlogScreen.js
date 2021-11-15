@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Container, Row, Col, Form, Button, ToggleButtonGroup, InputGroup, FormControl } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faComment, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from "react-redux";
+import { Card, Container, Row, Col, Button } from 'react-bootstrap'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faUser, faComment, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from "react-redux";
 import axios from 'axios';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -14,16 +14,16 @@ const BlogScreen = ({ history }) => {
 
     useEffect(() => {
         if (userInfo) {
-            const fetchPosts = async (userId) => {
-                const res = await axios.get(`/api/blogs/${userId}`)
-                setPosts(res.data)
-                console.log(res.data);
+            const fetchPosts = async (id) => {
+                const { data } = await axios.get(`/api/blogs/${id}`)
+                setPosts(data)
+                console.log(data);
             }
             fetchPosts(userInfo._id);
         } else {
             history.push('/login');
         }
-    }, [history, userInfo, posts])
+    }, [history, userInfo])
 
     return (
         <div>
@@ -33,19 +33,19 @@ const BlogScreen = ({ history }) => {
                         <Card className="my-5">
                             <Card.Body>
                                 {
-                                    posts.map((post) => {
-                                        <Card key={post._id}>
-                                            <Card.Body>
-                                                <LinkContainer to={`/blogs/${post.sectionId}`}><Card.Header>{post.sectionId}</Card.Header></LinkContainer>
-                                                <Card.Title>{post.title}</Card.Title>
-                                                <Card.Text>{post.contents}</Card.Text>
-                                                <Button>Comment</Button>
-                                            </Card.Body>
-                                        </Card>
-                                        // post.map((post2) => {
-                                        // })
-                                    })
-                            }
+                                    posts.map((post1) => (
+                                        // post1.map((post2) => (
+                                            // post2.map((po1) => (
+                                                <Card key={post1._id}>
+                                                    <Card.Body>
+                                                        {/* <Card.Header>{po1.sectionId}</Card.Header>
+                                                        <Card.Title>{po1.title}</Card.Title> */}
+                                                    </Card.Body>
+                                                </Card>
+                                            // ))
+                                        // ))
+                                    ))
+                                }
                             </Card.Body>
                         </Card>
                     </Col>

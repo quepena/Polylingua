@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { Container, Row, InputGroup, Col, Form, Card, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faSearch, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const SearchBox = ({ history }) => {
     const [keyword, setKeyword] = useState('');

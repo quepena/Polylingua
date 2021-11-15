@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Container, Row, Col, Form, Button, ToggleButtonGroup, InputGroup, FormControl } from 'react-bootstrap'
+import { Card, Container, Form, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from 'axios'
 
 const BlogSectionScreen = ({ match }) => {
@@ -10,8 +10,6 @@ const BlogSectionScreen = ({ match }) => {
     const [title, setTitle] = useState('');
 
     const [contents, setContents] = useState('');
-
-    const [newPost, setNewPost] = useState('');
 
     const [sectionId, setSectionId] = useState('');
 

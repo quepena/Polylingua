@@ -26,6 +26,12 @@ const createPost = asyncHandler(async (req, res) => {
 const getPostsBySection = asyncHandler(async (req, res) => {
     const currentUser = await User.findById(req.params.userId);
 
+    // const sections = await currentUser.isLearning.map((lang) => {
+    //        return Post.find({ sectionId: lang })
+    //     })
+
+    // let sectionPosts = await Post.find({ sectionId: sections })
+
     const sectionPosts = await Promise.all(
         currentUser.isLearning.map((lang) => {
             return Post.find({ sectionId: lang })

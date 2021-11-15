@@ -6,7 +6,7 @@ import FormContainer from "../components/FormContainer";
 import { Form, Button } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import axios from 'axios';
+// import axios from 'axios';
 
 const UserScreen = ({ location, history }) => {
     const dispatch = useDispatch();

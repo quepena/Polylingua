@@ -50,7 +50,7 @@ export const adminUsersDelete = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.delete(`/api/admin/users/${id}`, config);
+        await axios.delete(`/api/admin/users/${id}`, config);
 
         dispatch({
             type: ADMIN_USER_DELETE_SUCCESS,

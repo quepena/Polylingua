@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, InputGroup, Col, FormControl, Card, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faSearch } from '@fortawesome/free-solid-svg-icons';
-import User from '../components/User';
+import { Container, Row, Card } from 'react-bootstrap';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faUser, faSearch } from '@fortawesome/free-solid-svg-icons';
+// import User from '../components/User';
 import axios from 'axios';
-import users from '../users';;
 
 const UserProfileScreen = ({ match }) => {
     const [user, setUser] = useState({});

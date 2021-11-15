@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, InputGroup, Col, FormControl, Card, Button, Form } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Container, Row, InputGroup, FormControl, Card, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faSearch } from '@fortawesome/free-solid-svg-icons';
-import User from '../components/User';
-import axios from 'axios';
-import users from '../users';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+// import User from '../components/User';
+// import axios from 'axios';
+// import users from '../users';
 import { adminUsersList, adminUsersDelete } from '../actions/adminActions';
 import Loader from "../components/Loader";
 import Message from "../components/Message";

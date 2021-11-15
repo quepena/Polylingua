@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Container, Row, Col, CarouselItem, Button } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import { format } from 'timeago.js'
 
 const ChatMessage = ({ chatMessage, own }) => {

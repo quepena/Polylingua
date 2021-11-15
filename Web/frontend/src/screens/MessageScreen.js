@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Row, Col, Card, Container, Form, Alert, Image, Button } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { messagesListByConversation, conversationsListByUser } from '../actions/messageActions';
-import Loader from "../components/Loader";
-import Message from "../components/Message";
+import { Row, Col, Card, Container, Form, Button } from 'react-bootstrap'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faUser } from '@fortawesome/free-solid-svg-icons';
+// import { messagesListByConversation, conversationsListByUser } from '../actions/messageActions';
+// import Loader from "../components/Loader";
+// import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 import ChatMessage from '../components/ChatMessage';
@@ -48,7 +48,7 @@ const MessageScreen = ({ history }) => {
         } else {
             history.push('/login');
         }
-    }, [userInfo])
+    }, [userInfo, history])
 
     useEffect(() => {
         arrivedMessage && currentConversation?.arrivalMessage.sender &&
@@ -65,13 +65,13 @@ const MessageScreen = ({ history }) => {
         } else {
             history.push('/login');
         }
-    }, [userInfo])
+    }, [userInfo, history])
 
     useEffect(() => {
         if (userInfo) {
             const fetchConversations = async (id) => {
-                const res = await axios.get(`/api/conversations/${id}`, config)
-                setConversations(res.data)
+                const { data } = await axios.get(`/api/conversations/${id}`, config)
+                setConversations(data)
             }
             fetchConversations(userInfo._id);
         } else {
@@ -94,8 +94,8 @@ const MessageScreen = ({ history }) => {
     useEffect(() => {
         if (userInfo) {
             const fetchMessages = async (id) => {
-                const res = await axios.get(`/api/messages/${id}`, config)
-                setMessages(res.data)
+                const { data } = await axios.get(`/api/messages/${id}`, config)
+                setMessages(data)
             }
             fetchMessages(currentConversation?._id);
         } else {
