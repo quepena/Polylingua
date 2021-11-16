@@ -8,7 +8,6 @@ const citySchema = new mongoose.Schema({
         lowercase: true,
     },
     countryId: {
-        // type: mongoose.Schema.Types.ObjectId,
         type: String,
         required: true,
         ref: 'Country'

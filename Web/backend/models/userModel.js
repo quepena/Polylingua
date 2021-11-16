@@ -19,17 +19,10 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
     },
     nativeLanguage: {
-        // type: mongoose.Schema.Types.ObjectId,
         type: String,
         required: true,
-        // ref: 'Language',
-    },
-    alsoSpeaks: {
-        type: String
     },
     isLearning: {
-        // type: mongoose.Schema.Types.ObjectId,
-        // type: Array,
         type: String,
         required: true,
     },
@@ -43,16 +36,12 @@ const userSchema = new mongoose.Schema({
         enum: ['Male', 'Female', 'Unknown']
     },
     country: {
-        // type: mongoose.Schema.Types.ObjectId,
         type: String,
         required: true,
-        ref: 'Country'
     },
     city: {
-        // type: mongoose.Schema.Types.ObjectId,
         type: String,
         required: true,
-        ref: 'City',
     },
     introduction: {
         type: String,
@@ -76,19 +65,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: false
     },
-    photos: [{
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Photo'
-    }],
-    posts: [{
-        // type: mongoose.Schema.Types.ObjectId,
-        // ref: 'Post'
-        type: Array
-    }],
-    comments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comment'
-    }]
+    photo: {
+        type: String,
+        required: false
+    }
 }, {
     timestamps: true
 })

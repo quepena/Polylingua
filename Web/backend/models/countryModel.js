@@ -7,11 +7,6 @@ const countrySchema = new mongoose.Schema({
         unique: true,
         lowercase: true,
     },
-    // cities: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: true,
-    //     ref: 'City' 
-    // }],
 }, {
     timestamps: true,
 })

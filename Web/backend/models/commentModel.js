@@ -2,22 +2,18 @@ import mongoose from 'mongoose'
 
 const commentSchema = new mongoose.Schema({
     postId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
-        ref: 'Post'
     },
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
-        ref: 'User'
     },
     replies: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comment'
+        type: String
     }],
     contents: {
         type: String,
-        required: true,
         required: true,
     },
     date: {
