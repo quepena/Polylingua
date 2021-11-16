@@ -1,10 +1,10 @@
 import express from 'express'
 const router = express.Router();
-import { createPost, getPostsBySection } from '../controllers/blogController.js';
+import { createPost, getPostsBySection, getPosts } from '../controllers/blogController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
-// router.route('/:sectionId').post(protect, createPost);
+router.route('/:sectionId').post(protect, createPost).get(getPosts);
 
-router.route('/:userId').get(getPostsBySection)
+router.route('/blogs/:userId').get(getPostsBySection)
 
 export default router;

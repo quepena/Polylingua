@@ -49,8 +49,9 @@ const UserScreen = ({ location, history }) => {
     }, [dispatch, history, userInfo, user, successDelete])
 
     const deleteHandler = (e, id) => {
-        e.preventDefault();
-        dispatch(deleteUserAccount(id));
+        if (window.confirm('Are you sure you want to delete your account?')) {
+            dispatch(deleteUserAccount(userInfo._id));
+        }
     }
 
     const submitHandler = (e) => {

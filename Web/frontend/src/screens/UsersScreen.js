@@ -45,19 +45,28 @@ const UsersScreen = ({ match, history }) => {
             </Row>
             <Row style={{ display: 'flex', juctifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
                 {
-                    users.map((user) => (
-                        <LinkContainer to={`/${user._id}`} key={user._id}>
-                            <Card style={{ width: '25%', margin: '2%' }}>
-                                <Card.Body>
-                                    <Card.Title>{user.username}</Card.Title>
-                                    <Button>Go to profile</Button>
-                                </Card.Body>
-                            </Card>
-                        </LinkContainer>
-                    ))
+                    userInfo ?
+                        (
+                            users.map((user) => (
+                                user._id === userInfo._id ? (<Card></Card>) :
+                                    (
+                                        <LinkContainer to={`/${user._id}`} key={user._id}>
+                                            <Card style={{ width: '25%', margin: '2%' }}>
+                                                <Card.Body>
+                                                    <Card.Title>{user.username}</Card.Title>
+                                                    <Button>Go to profile</Button>
+                                                </Card.Body>
+                                            </Card>
+                                        </LinkContainer>
+                                    )
+                            ))
+                        ) :
+                        (
+                            <LinkContainer to="/login">Sign in</LinkContainer>
+                        )
                 }
             </Row>
-        </Container>
+        </Container >
     )
 }
 

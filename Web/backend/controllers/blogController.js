@@ -32,11 +32,13 @@ const getPostsBySection = asyncHandler(async (req, res) => {
 
     // let sectionPosts = await Post.find({ sectionId: sections })
 
-    const sectionPosts = await Promise.all(
-        currentUser.isLearning.map((lang) => {
-            return Post.find({ sectionId: lang })
-        })
-    )
+    const sectionPosts = await Post.find({ sectionId: currentUser.isLearning })
+
+    // const sectionPosts = await Promise.all(
+    //     currentUser.isLearning.map((lang) => {
+    //         return Post.find({ sectionId: lang })
+    //     })
+    // )
 
     res.json(sectionPosts);
 })
@@ -63,6 +65,12 @@ const getPostsBySection = asyncHandler(async (req, res) => {
 //     })
 
 //     res.json(conversation);
+
+const getPosts = asyncHandler(async (req, res) => {
+    const posts = await Post.find({ sectionId: req.params.sectionId })
+
+    res.json(posts);
+})
 // })
 
-export { createPost, getPostsBySection };
+export { createPost, getPostsBySection, getPosts };

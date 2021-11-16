@@ -50,17 +50,12 @@ const RegisterScreen = ({ location, history }) => {
             setCountry(data)
         };
         fetchCountries();
-        const fetchCities = async () => {
-            const { data } = await axios.get('/api/cities');
-            setCity(data)
-        };
-        fetchCities();
-        
+
     }, [history, userInfo, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault();
-        const calculateAge = async(dateOfBirth) => {
+        const calculateAge = async (dateOfBirth) => {
             var diff_ms = Date.now() - dateOfBirth;
             var age_dt = new Date(diff_ms);
             var age = Math.abs(age_dt.getUTCFullYear() - 1970)
@@ -70,32 +65,32 @@ const RegisterScreen = ({ location, history }) => {
         if (password !== confirmPassword) {
             setMessage('Passwords don\'t match');
         }
-        else if(!selectedNativeLanguage) {
+        else if (!selectedNativeLanguage) {
             setMessage('Select your native language please!');
         }
-        else if(!selectedIsLearning) {
+        else if (!selectedIsLearning) {
             setMessage('Select a language you are learning please!');
         }
-        else if(selectedNativeLanguage === selectedIsLearning) {
+        else if (selectedNativeLanguage === selectedIsLearning) {
             setMessage('Native language and the language you are learning can\'t be similar');
         }
-        else if(!dateOfBirth) {
+        else if (!dateOfBirth) {
             setMessage('Choose your date of birth please!')
         }
-        else if(age<13) {
+        else if (age < 13) {
             setMessage('You must be older than 13');
         }
-        else if(!gender) {
+        else if (!gender) {
             setMessage('Select your gender please!');
-        } 
-        else if(!selectedCountry) {
+        }
+        else if (!selectedCountry) {
             setMessage('Select your country please!');
-        } 
-        else if(!selectedCity) {
+        }
+        else if (!selectedCity) {
             setMessage('Select your city please!');
         }
-        else if(!introduction) {
-                setMessage('Enter your introduction please!');
+        else if (!introduction) {
+            setMessage('Enter your introduction please!');
         } else {
             dispatch(register(username, password, knownAs, selectedNativeLanguage, selectedIsLearning, dateOfBirth, gender, selectedCountry, selectedCity, introduction));
             // dispatch(register(username, password, knownAs))
@@ -163,9 +158,9 @@ const RegisterScreen = ({ location, history }) => {
                 </Form.Group>
                 <Form.Group controlId="isLearning">
                     <Form.Label>Language you want to learn</Form.Label>
-                    <Form.Control as="select" multiple value={selectedIsLearning} onChange={e => setSelectedIsLearning([].slice.call(e.target.selectedOptions).map(item => item.value))}>
-                    {/* <Form.Control as="select" type="" value={selectedIsLearning}
-                        onChange={(e) => setSelectedIsLearning(e.target.value)}> */}
+                    {/* <Form.Control as="select" multiple value={selectedIsLearning} onChange={e => setSelectedIsLearning([].slice.call(e.target.selectedOptions).map(item => item.value))}> */}
+                    <Form.Control as="select" type="" value={selectedIsLearning}
+                        onChange={(e) => setSelectedIsLearning(e.target.value)}>
                         {
                             languages.map((language) => (
                                 <option value={language.languageName} key={language._id}>
@@ -192,7 +187,14 @@ const RegisterScreen = ({ location, history }) => {
                 <Form.Group controlId="country">
                     <Form.Label>Country you are in</Form.Label>
                     <Form.Control as="select" type="" value={selectedCountry}
-                        onChange={(e) => setSelectedCountry(e.target.value)}>
+                        onChange={(e) => {
+                            setSelectedCountry(e.target.value); 
+                            const fetchCities = async (selectedCountry) => {
+                                const { data } = await axios.get(`/api/cities/${selectedCountry}`);
+                                setCity(data)
+                            };
+                            fetchCities(e.target.value);
+                        }}>
                         {
                             countries.map((country, _id) => (
                                 <option value={country.countryName} key={country._id}>

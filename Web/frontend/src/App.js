@@ -22,6 +22,7 @@ function App() {
       <Route path='/' component={UsersScreen} exact />
       <Route path="/login" component={LoginScreen} exact ></Route>
       <Route path="/register" component={RegisterScreen} exact ></Route>
+      <Route path="/profile" component={UserProfileScreen} exact></Route>
       <Route path="/profile/edit" component={UserScreen} exact></Route>
       <Route path="/admin/users" component={AdminUsersScreen} exact></Route>
       <Route path="/:id" component={UserProfileScreen}/>

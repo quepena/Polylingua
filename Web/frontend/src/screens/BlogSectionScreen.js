@@ -30,7 +30,7 @@ const BlogSectionScreen = ({ match }) => {
         }
         fetchPosts();
 
-    }, [posts])
+    }, [])
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -42,7 +42,7 @@ const BlogSectionScreen = ({ match }) => {
         }
 
         const res = await axios.post(`/api/blogs/${sectionId}`, post, config)
-        setPosts([...posts, res.data])
+        setPosts([...posts])
     }
 
     return (

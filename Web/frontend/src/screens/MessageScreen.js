@@ -22,6 +22,8 @@ const MessageScreen = ({ history }) => {
     const [newMessage, setNewMessage] = useState('');
     const [arrivedMessage, setArrivedMessage] = useState(null);
 
+    const [friend, setFriend] = useState([]);
+
     const socket = useRef();
 
     const scrollRef = useRef();
@@ -52,7 +54,7 @@ const MessageScreen = ({ history }) => {
 
     useEffect(() => {
         arrivedMessage && currentConversation?.arrivalMessage.sender &&
-        setMessages(prev => [...prev, arrivedMessage])
+            setMessages(prev => [...prev, arrivedMessage])
 
     }, [arrivedMessage, currentConversation])
 
@@ -77,19 +79,19 @@ const MessageScreen = ({ history }) => {
         } else {
             history.push('/login');
         }
-    }, [dispatch, history, userInfo, conversations])
+    }, [history, userInfo, conversations])
 
-
-    //dlya userov sboku
-
-    // useEffect(() => {
-    //     const friend = conversations.participants.find((p) => p !== userInfo._id)
-
-    //     const fetchUsers = async () => {
-    //         const res = await axios(`/api/users/users/${friend}`);
-    //     } 
-    //     fetchUsers();
-    // }, [userInfo, conversations])
+    useEffect(() => {
+        const friend = conversations.map((conversation) => conversation.participants.map((participant) => {
+            if (participant !== userInfo._id) {
+                const fetchUsers = async (friend) => {
+                    const res = await axios(`/api/users/users/${friend}`);
+                    setFriend(res.data)
+                }
+                fetchUsers(participant)
+            }
+        }))
+    }, [userInfo, conversations])
 
     useEffect(() => {
         if (userInfo) {
@@ -123,8 +125,8 @@ const MessageScreen = ({ history }) => {
         const reciever = currentConversation.reciever
 
         socket.current.emit("sendMessage", {
-            sender: userInfo._id, 
-            reciever, 
+            sender: userInfo._id,
+            reciever,
             contents: newMessage
         })
 
@@ -137,35 +139,6 @@ const MessageScreen = ({ history }) => {
             <Container>
                 <Card>
                     <Card.Body>
-                        {/* <Row md={10}>
-                            <Col xs={4}>
-                                <Card style={{backgroundColor: 'lightgray'}}>
-                                    <Card.Body>
-                                        <Card.Title><FontAwesomeIcon className="mx-2" icon={faUser}></FontAwesomeIcon><strong>Antoine</strong></Card.Title>
-                                        <Card.Text>Bonjour! Oui! Comment tu t'appeles?</Card.Text>
-                                    </Card.Body>
-                                </Card>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Title><FontAwesomeIcon className="mx-2" icon={faUser}></FontAwesomeIcon><strong>Jessica</strong></Card.Title>
-                                        <Card.Text>Hi. Saw you in this app today</Card.Text>
-                                    </Card.Body>
-                                </Card>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Title><FontAwesomeIcon className="mx-2" icon={faUser}></FontAwesomeIcon><strong>Li Hua</strong></Card.Title>
-                                        <Card.Text>Hey, wanna learn some Chinese?</Card.Text>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                            <Col xs={6}>
-                                <Alert variant="success"  className="mx-4">Hi! I want to start learning French, would you mind helping me?</Alert>
-                                <Alert variant="primary" className="my-5">Bonjour! Oui! Comment tu t'appeles?</Alert>
-                                <Card>
-                                    <Form.Control className="mx-2" as="textarea" style={{borderLeft: 'none'}} placeholder="Write a message here" />
-                                </Card>
-                            </Col>
-                        </Row> */}
                         <Row>
                             <Col md={4}>
                                 {
@@ -174,9 +147,7 @@ const MessageScreen = ({ history }) => {
                                             setCurrentConversation(conversation);
                                         }}>
                                             <Card.Body>
-                                                <Card.Title>{conversation.participants}</Card.Title>
-                                                {/* <LinkContainer to={`/admin/user/${user._id}/edit`}><Button variant="light">Edit account</Button></LinkContainer>
-                                                <Button variant="danger" onClick={() => deleteHandler(user._id)}>Delete account</Button> */}
+                                                <Card.Title>{friend.username}</Card.Title>
                                             </Card.Body>
                                         </Button></Card>
                                     ))

@@ -29,7 +29,8 @@ const userSchema = new mongoose.Schema({
     },
     isLearning: {
         // type: mongoose.Schema.Types.ObjectId,
-        type: Array,
+        // type: Array,
+        type: String,
         required: true,
     },
     dateOfBirth: {

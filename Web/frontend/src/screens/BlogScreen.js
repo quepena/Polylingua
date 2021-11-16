@@ -15,7 +15,7 @@ const BlogScreen = ({ history }) => {
     useEffect(() => {
         if (userInfo) {
             const fetchPosts = async (id) => {
-                const { data } = await axios.get(`/api/blogs/${id}`)
+                const { data } = await axios.get(`/api/blogs/blogs/${id}`)
                 setPosts(data)
                 console.log(data);
             }
@@ -33,17 +33,13 @@ const BlogScreen = ({ history }) => {
                         <Card className="my-5">
                             <Card.Body>
                                 {
-                                    posts.map((post1) => (
-                                        // post1.map((post2) => (
-                                            // post2.map((po1) => (
-                                                <Card key={post1._id}>
-                                                    <Card.Body>
-                                                        {/* <Card.Header>{po1.sectionId}</Card.Header>
-                                                        <Card.Title>{po1.title}</Card.Title> */}
-                                                    </Card.Body>
-                                                </Card>
-                                            // ))
-                                        // ))
+                                    posts.map((post) => (
+                                        <Card key={post._id}>
+                                            <Card.Body>
+                                                <Card.Title>{post.title}</Card.Title>
+                                                <Card.Footer>{post.contents}</Card.Footer>
+                                            </Card.Body>
+                                        </Card>
                                     ))
                                 }
                             </Card.Body>
