@@ -4,8 +4,6 @@ import Conversation from "../models/conversationModel.js";
 import User from "../models/userModel.js";
 
 const createConversation = asyncHandler(async (req, res) => {
-    // const { participants } = req.body;
-
     const newConversation = await Conversation.create({
         participants: [req.body.sender, req.body.reciever]
     })
