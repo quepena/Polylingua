@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 import ChatMessage from '../components/ChatMessage';
 import { io } from 'socket.io-client'
+import Conversation from '../components/Conversation';
 
 const MessageScreen = ({ history }) => {
     const dispatch = useDispatch();
@@ -71,27 +72,21 @@ const MessageScreen = ({ history }) => {
 
     useEffect(() => {
         if (userInfo) {
+
             const fetchConversations = async (id) => {
-                const { data } = await axios.get(`/api/conversations/${id}`, config)
-                setConversations(data)
+                try {
+                    const res = await axios.get(`/api/conversations/${id}`, config)
+                    console.log(res.data);
+                    setConversations(res.data)
+                } catch (error) {
+                    console.log(error);
+                }
             }
             fetchConversations(userInfo._id);
         } else {
             history.push('/login');
         }
-    }, [history, userInfo, conversations])
-
-    useEffect(() => {
-        const friend = conversations.map((conversation) => conversation.participants.map((participant) => {
-            if (participant !== userInfo._id) {
-                const fetchUsers = async (friend) => {
-                    const res = await axios(`/api/users/users/${friend}`);
-                    setFriend(res.data)
-                }
-                fetchUsers(participant)
-            }
-        }))
-    }, [userInfo, conversations])
+    }, [userInfo, history])
 
     useEffect(() => {
         if (userInfo) {
@@ -103,7 +98,20 @@ const MessageScreen = ({ history }) => {
         } else {
             history.push('/login');
         }
-    }, [dispatch, history, userInfo, messages])
+    }, [dispatch, history, userInfo, currentConversation])
+
+    // useEffect(() => {
+    //     const friend = conversations.participants.find((m) => m !== userInfo._id)
+    //     // const friend = conversations.map((conversation) => conversation.participants.map((participant) => {
+    //     //     if (participant !== userInfo._id) {
+    //     //         const fetchUsers = async (friend) => {
+    //     //             const res = await axios(`/api/users/users/${friend}`);
+    //     //             setFriend(res.data)
+    //     //         }
+    //     //         fetchUsers(participant)
+    //     //     }
+    //     // }))
+    // }, [userInfo, conversations])
 
     useEffect(() => {
         if (userInfo) {
@@ -142,14 +150,11 @@ const MessageScreen = ({ history }) => {
                         <Row>
                             <Col md={4}>
                                 {
-                                    conversations.map((conversation) => (
-                                        <Card key={conversation._id}><Button onClick={() => {
-                                            setCurrentConversation(conversation);
-                                        }}>
-                                            <Card.Body>
-                                                <Card.Title>{friend.username}</Card.Title>
-                                            </Card.Body>
-                                        </Button></Card>
+                                    conversations.map((c) => (
+                                        <div onClick={() => {
+                                            setCurrentConversation(c);
+                                        }}><Conversation conversation={c} />
+                                        </div>
                                     ))
                                 }
 
@@ -163,8 +168,8 @@ const MessageScreen = ({ history }) => {
                                             </div>
                                         ))
                                     }
-                                    <Form.Control onChange={(e) => setNewMessage(e.target.value)} value={newMessage} className="mx-2" as="textarea" style={{ borderLeft: 'none' }} placeholder="Write a message here" />
-                                    <Button onClick={submitHandler} type="submit" variant="primary">Send</Button>
+                                    {/* <Form.Control onChange={(e) => setNewMessage(e.target.value)} value={newMessage} className="mx-2" as="textarea" style={{ borderLeft: 'none' }} placeholder="Write a message here" />
+                                        <Button onClick={submitHandler} type="submit" variant="primary">Send</Button> */}
                                 </Col>
                             </Col>
                         </Row>

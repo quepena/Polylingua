@@ -14,7 +14,7 @@ const reducer = combineReducers({
     adminUserList: adminUsersListReducer,
     adminUserDelete: adminUsersDeleteReducer,
     conversationListByUser: conversationListReducer,
-    messageListByConversation: messageListReducer,
+    // messageListByConversation: messageListReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null;

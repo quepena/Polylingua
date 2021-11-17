@@ -15,26 +15,26 @@ const UserProfileScreen = ({ match, history }) => {
 
     const dispatch = useDispatch();
 
-    const [conversations, setConversations] = useState([]);
+    // const [conversations, setConversations] = useState([]);
 
-    useEffect(() => {
-        if (userInfo) {
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${userInfo.token}`
-                }
-            }
+    // useEffect(() => {
+    //     if (userInfo) {
+    //         const config = {
+    //             headers: {
+    //                 Authorization: `Bearer ${userInfo.token}`
+    //             }
+    //         }
 
-            const fetchConversations = async (id) => {
-                const { data } = await axios.get(`/api/conversations/${id}`, config)
-                setConversations(data)
-            }
-            fetchConversations(userInfo._id);
-        } else {
-            history.push('/login');
-        }
+    //         const fetchConversations = async (id) => {
+    //             const { data } = await axios.get(`/api/conversations/${id}`, config)
+    //             setConversations(data)
+    //         }
+    //         fetchConversations(userInfo._id);
+    //     } else {
+    //         history.push('/login');
+    //     }
 
-    }, [history, userInfo, conversations])
+    // }, [history, userInfo, conversations])
 
     useEffect(() => {
         if (userInfo) {
@@ -57,30 +57,30 @@ const UserProfileScreen = ({ match, history }) => {
     }, [history, userInfo])
 
     const submitHandler = async (e) => {
-        if (userInfo) {
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${userInfo.token}`
-                }
-            }
+        // if (userInfo) {
+        //     const config = {
+        //         headers: {
+        //             Authorization: `Bearer ${userInfo.token}`
+        //         }
+        //     }
 
-            let flag = false
-            conversations.map(conv => {
-                if (conv.sender === userInfo._id && conv.reciever !== user._id) {
-                    flag = true
-                }
-            })
-            if (flag === true) {
-                const conversation = {
-                    sender: userInfo._id,
-                    reciever: user._id
-                }
-                const res = await axios.post('/api/conversations', conversation, config)
-                setConversations([...conversations, res.data])
-            }
-        } else {
-            history.push('/login');
-        }
+        //     let flag = false
+        //     conversations.map(conv => {
+        //         if (conv.sender === userInfo._id && conv.reciever !== user._id) {
+        //             flag = true
+        //         }
+        //     })
+        //     if (flag === true) {
+        //         const conversation = {
+        //             sender: userInfo._id,
+        //             reciever: user._id
+        //         }
+        //         const res = await axios.post('/api/conversations', conversation, config)
+        //         setConversations([...conversations, res.data])
+        //     }
+        // } else {
+        //     history.push('/login');
+        // }
     }
 
     return (

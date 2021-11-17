@@ -67,7 +67,7 @@ const getPostsBySection = asyncHandler(async (req, res) => {
 //     res.json(conversation);
 
 const getPosts = asyncHandler(async (req, res) => {
-    const posts = await Post.find({ sectionId: req.params.sectionId })
+    const posts = await Post.find({ sectionId: req.params.sectionId }).sort({createdAt: -1})
 
     res.json(posts);
 })

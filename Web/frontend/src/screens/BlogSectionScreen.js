@@ -43,6 +43,7 @@ const BlogSectionScreen = ({ match }) => {
 
         const res = await axios.post(`/api/blogs/${sectionId}`, post, config)
         setPosts([...posts])
+        window.location.reload()
     }
 
     return (
