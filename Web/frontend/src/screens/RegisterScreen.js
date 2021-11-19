@@ -53,14 +53,17 @@ const RegisterScreen = ({ location, history }) => {
 
     }, [history, userInfo, redirect])
 
+    const calculateAge = async (dateOfBirth) => {           
+        var Bdate = dateOfBirth;
+        var Bday = +new Date(Bdate);
+        var calculatedAge = ((Date.now() - Bday) / (31557600000));
+        setAge(calculatedAge)
+        console.log(age);
+        console.log(calculatedAge);
+    }
+
     const submitHandler = (e) => {
         e.preventDefault();
-        const calculateAge = async (dateOfBirth) => {
-            var diff_ms = Date.now() - dateOfBirth;
-            var age_dt = new Date(diff_ms);
-            var age = Math.abs(age_dt.getUTCFullYear() - 1970)
-            setAge(age)
-        }
         calculateAge(dateOfBirth);
         if (password !== confirmPassword) {
             setMessage('Passwords don\'t match');
@@ -188,7 +191,7 @@ const RegisterScreen = ({ location, history }) => {
                     <Form.Label>Country you are in</Form.Label>
                     <Form.Control as="select" type="" value={selectedCountry}
                         onChange={(e) => {
-                            setSelectedCountry(e.target.value); 
+                            setSelectedCountry(e.target.value);
                             const fetchCities = async (selectedCountry) => {
                                 const { data } = await axios.get(`/api/cities/${selectedCountry}`);
                                 setCity(data)

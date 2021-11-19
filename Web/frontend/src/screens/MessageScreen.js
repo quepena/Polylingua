@@ -40,7 +40,7 @@ const MessageScreen = ({ history }) => {
 
     useEffect(() => {
         if (userInfo) {
-            socket.current = io("ws:localhost:8900");
+            socket.current = io("ws://127.0.0.1:8900");
             socket.current.on("getMessage", data => {
                 setArrivedMessage({
                     sender: data.sender,
@@ -54,7 +54,7 @@ const MessageScreen = ({ history }) => {
     }, [userInfo, history])
 
     useEffect(() => {
-        arrivedMessage && currentConversation?.arrivalMessage.sender &&
+        arrivedMessage && currentConversation?.participants.includes(arrivedMessage.sender) &&
             setMessages(prev => [...prev, arrivedMessage])
 
     }, [arrivedMessage, currentConversation])
@@ -100,19 +100,6 @@ const MessageScreen = ({ history }) => {
         }
     }, [dispatch, history, userInfo, currentConversation])
 
-    // useEffect(() => {
-    //     const friend = conversations.participants.find((m) => m !== userInfo._id)
-    //     // const friend = conversations.map((conversation) => conversation.participants.map((participant) => {
-    //     //     if (participant !== userInfo._id) {
-    //     //         const fetchUsers = async (friend) => {
-    //     //             const res = await axios(`/api/users/users/${friend}`);
-    //     //             setFriend(res.data)
-    //     //         }
-    //     //         fetchUsers(participant)
-    //     //     }
-    //     // }))
-    // }, [userInfo, conversations])
-
     useEffect(() => {
         if (userInfo) {
             scrollRef.current?.scrollIntoView({ behavior: "auto" })
@@ -123,14 +110,15 @@ const MessageScreen = ({ history }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+
         const message = {
             sender: userInfo._id,
             contents: newMessage,
             conversationId: currentConversation._id,
-
         }
+        console.log(message);
 
-        const reciever = currentConversation.reciever
+        const reciever = currentConversation.participants.find(m => m!==userInfo._id)
 
         socket.current.emit("sendMessage", {
             sender: userInfo._id,
@@ -168,8 +156,8 @@ const MessageScreen = ({ history }) => {
                                             </div>
                                         ))
                                     }
-                                    {/* <Form.Control onChange={(e) => setNewMessage(e.target.value)} value={newMessage} className="mx-2" as="textarea" style={{ borderLeft: 'none' }} placeholder="Write a message here" />
-                                        <Button onClick={submitHandler} type="submit" variant="primary">Send</Button> */}
+                                    <Form.Control onChange={(e) => setNewMessage(e.target.value)} value={newMessage} className="mx-2" as="textarea" style={{ borderLeft: 'none' }} placeholder="Write a message here" />
+                                        <Button onClick={submitHandler} type="submit" variant="primary">Send</Button>
                                 </Col>
                             </Col>
                         </Row>

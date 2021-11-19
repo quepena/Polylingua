@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userDeleteProfileReducer } from './reducers/userReducers' 
 import { adminUsersListReducer, adminUsersDeleteReducer } from './reducers/adminReducers';
-import { conversationListReducer, messageListReducer } from './reducers/messageReducers';
+// import { conversationListReducer, messageListReducer } from './reducers/messageReducers';
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -13,7 +13,7 @@ const reducer = combineReducers({
     userDeleteProfile: userDeleteProfileReducer,
     adminUserList: adminUsersListReducer,
     adminUserDelete: adminUsersDeleteReducer,
-    conversationListByUser: conversationListReducer,
+    // conversationListByUser: conversationListReducer,
     // messageListByConversation: messageListReducer,
 });
 
