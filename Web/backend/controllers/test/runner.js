@@ -4,20 +4,18 @@
 // // const require = createRequire(import.meta.url);
 
 var base = process.env.PWD;
-var config = process.env.DUMMY_MONGO_URI;
+import connectDB from '../../config/db.js';
+import Post from "../models/postModel.js";
 import mongoose from 'mongoose';
 import registerUser from "../userController.js";
 import User from '../../models/userModel.js';
 import should from 'should';
 import testUtils from '../../test/utils.js';
 
-describe("User API", function () {
+describe("User API", () => {
     var dummyUser;
-    before(function (done) {
-        mongoose.connect(config, function () {
-            console.log("eueueu"+config);
-            done();
-        })
+    before((done) => {
+        connectDB().then(() => done()).catch((err) => done(err))
 
         // dummyUser = new User({
         //     'username': 'dummyuser',
@@ -39,6 +37,10 @@ describe("User API", function () {
         //     id = user._id;
         // })
     })
+
+    // it('Creating a user', done() => {
+    //     request()
+    // })
 
     // describe("Create User", function () {
     //     it("should create a new user", function (done) {
