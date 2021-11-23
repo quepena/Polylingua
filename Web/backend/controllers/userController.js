@@ -154,7 +154,7 @@ const deleteCurrentUserAccount = asyncHandler(async (req, res) => {
     };
 })
 
-export {
+export default {
     getUsers,
     getUserProfile,
     getCurrentUserProfile,
