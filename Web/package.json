@@ -4,8 +4,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon backend/server",
-    "test": "mocha **/test/runner.js --require @babel/register --recursive"
+    "start": "NODE_ENV=db nodemon backend/server",
+    "test": "NODE_ENV=testdb mocha --require @babel/register --recursive **/test/**Test.js --timeout 10000"
   },
   "author": "",
   "license": "ISC",

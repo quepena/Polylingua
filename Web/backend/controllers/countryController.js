@@ -7,4 +7,18 @@ const getCountries = asyncHandler(async(req, res) => {
     res.json(countries);
 })
 
-export { getCountries };
+const createCountry = asyncHandler(async (req, res) => {
+    const { countryName } = req.body;
+
+    const newCountry = await Country.create({
+        countryName
+    })
+
+    if (newCountry) {
+        res.status(201).json(newCountry)
+    } else {
+        res.status(400).json({ message: "Invalid country data" });
+    }
+})
+
+export { getCountries, createCountry };

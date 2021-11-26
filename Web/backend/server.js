@@ -1,4 +1,5 @@
 import connectDB from './config/db.js';
+// import connectDB from './config/testdb.js';
 import express from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js'
@@ -9,10 +10,18 @@ import adminRoutes from './routes/adminRoutes.js'
 import messageRoutes from './routes/messageRoutes.js'
 import conversationRoutes from './routes/conversationRoutes.js'
 import blogRoutes from './routes/blogRoutes.js'
+import mongoose from 'mongoose';
+import connectDummyDB from './config/testdb.js';
 
 dotenv.config();
 
-connectDB();
+console.log(process.env.NODE_ENV);
+if(process.env.NODE_ENV == 'testdb') {
+    connectDummyDB();
+}
+if(process.env.NODE_ENV == 'db') {
+    connectDB();
+}
 
 const app = express();
 
@@ -39,3 +48,5 @@ app.use('/api/conversations', conversationRoutes);
 app.use('/api/blogs', blogRoutes);
 
 app.listen(5000, console.log('Server'));
+
+export default app;

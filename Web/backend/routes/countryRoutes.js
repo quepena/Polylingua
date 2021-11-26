@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router();
-import { getCountries } from '../controllers/countryController.js';
+import { getCountries, createCountry } from '../controllers/countryController.js';
 
-router.route('/').get(getCountries);
+router.route('/').get(getCountries).post(createCountry);
 
 export default router;
