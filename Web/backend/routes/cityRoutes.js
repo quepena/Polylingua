@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router();
-import { getCities } from '../controllers/cityController.js';
+import { getCities, createCities } from '../controllers/cityController.js';
 
-router.route('/:countryId').get(getCities);
+router.route('/:countryId').get(getCities).post(createCities);
 
 export default router;

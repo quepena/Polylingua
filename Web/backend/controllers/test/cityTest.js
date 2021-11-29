@@ -15,19 +15,6 @@ describe("City API", () => {
                 done();
             });
         });   
-
-        // describe('/GET Cities', () => {
-        //     it('it should GET all the cities', (done) => {
-        //         chai.request('http://127.0.0.1:5000')
-        //             .get('/api/cities')
-        //             .end((err, res) => {
-        //                 res.status.should.be.equal(200);
-        //                 expect(res.body).to.be.an('array').that.is.empty;
-        //                 done();
-        //             });
-        //     });
-        // });
-
     });
     
     describe('/GET cities', () => {
@@ -44,6 +31,31 @@ describe("City API", () => {
                 .end((err, res) => {
                     res.status.should.be.equal(200);
                     expect(res.body).to.be.an('array').that.is.empty;
+                    done();
+                });
+        });
+    });
+
+    describe('/POST city', () => {
+        it('it should post a new city', (done) => {
+            let country = new Country({
+                countryName: "South Korea"
+            });
+            let city = new City({
+                cityName: "Seoul",
+                countryId: country.id
+            });
+            chai.request('http://127.0.0.1:5000')
+                .post('/api/countries/')
+                .send(country)
+                console.log(country);
+            chai.request('http://127.0.0.1:5000')
+                .post('/api/cities/'+country.id)
+                .send(city)
+                .end((err, res) => {
+                    res.status.should.be.equal(201);
+                    expect(res.body).to.be.an('object')
+                    expect(res.body).to.have.a.property('cityName');
                     done();
                 });
         });
