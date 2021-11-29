@@ -53,7 +53,6 @@ describe("Country API", () => {
                 .end((err, res) => {
                     res.status.should.be.equal(200);
                     expect(res.body).to.be.an('array').that.is.not.empty;
-                    // expect(res.body).to.have.a.property('countryName');
                     done();
                 });
         });
