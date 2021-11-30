@@ -10,7 +10,7 @@ describe("Country API", () => {
 
     describe('Countries', () => {
         beforeEach((done) => {
-            Country.deleteOne({}, (err) => {
+            Country.deleteMany({}, (err) => {
                 done();
             });
         });
@@ -18,7 +18,7 @@ describe("Country API", () => {
         describe('/GET countries', () => {
             it('it should GET all the countries', (done) => {
                 chai.request('http://127.0.0.1:5000')
-                    .get('/api/countries')
+                    .get('/api/countries/')
                     .end((err, res) => {
                         res.status.should.be.equal(200);
                         expect(res.body).to.be.an('array').that.is.empty;
@@ -31,11 +31,11 @@ describe("Country API", () => {
 
     describe('/POST country', () => {
         it('it should post a new country', (done) => {
-            let country = {
+            let country = new Country({
                 countryName: "Argentina"
-            }
+            })
             chai.request('http://127.0.0.1:5000')
-                .post('/api/countries')
+                .post('/api/countries/')
                 .send(country)
                 .end((err, res) => {
                     res.status.should.be.equal(201);
@@ -49,7 +49,7 @@ describe("Country API", () => {
     describe('/GET country', () => {
         it('it should GET all the countries', (done) => {
             chai.request('http://127.0.0.1:5000')
-                .get('/api/countries')
+                .get('/api/countries/')
                 .end((err, res) => {
                     res.status.should.be.equal(200);
                     expect(res.body).to.be.an('array').that.is.not.empty;

@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router();
-import { getLanguages } from '../controllers/languageController.js';
+import { getLanguages, createLanguage } from '../controllers/languageController.js';
 
-router.route('/').get(getLanguages);
+router.route('/').get(getLanguages).post(createLanguage);
 
 export default router;

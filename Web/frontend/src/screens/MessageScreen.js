@@ -40,7 +40,7 @@ const MessageScreen = ({ history }) => {
 
     useEffect(() => {
         if (userInfo) {
-            socket.current = io("ws://127.0.0.1:8900");
+            socket.current = io("ws://127.0.0.1:8900"); //change it
             socket.current.on("getMessage", data => {
                 setArrivedMessage({
                     sender: data.sender,
@@ -118,7 +118,7 @@ const MessageScreen = ({ history }) => {
         }
         console.log(message);
 
-        const reciever = currentConversation.participants.find(m => m!==userInfo._id)
+        const reciever = currentConversation.participants.find(m => m !== userInfo._id)
 
         socket.current.emit("sendMessage", {
             sender: userInfo._id,
