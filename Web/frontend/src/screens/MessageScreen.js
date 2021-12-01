@@ -40,7 +40,8 @@ const MessageScreen = ({ history }) => {
 
     useEffect(() => {
         if (userInfo) {
-            socket.current = io("ws://127.0.0.1:8900"); //change it
+            //socket.current = io("ws://127.0.0.1:8900"); //change it
+            socket.current = io("ws://192.168.0.105:8900");
             socket.current.on("getMessage", data => {
                 setArrivedMessage({
                     sender: data.sender,
