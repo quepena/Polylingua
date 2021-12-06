@@ -44,7 +44,7 @@ const Conversation = ({ conversation }) => {
     }, [userInfo, conversation])
 
     return (
-        <Card>
+        <Card style={{margin: "2% 0 2% 0"}}>
             <Card.Body>
                 <Card.Title>{friend.username}</Card.Title>
             </Card.Body>

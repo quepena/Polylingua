@@ -6,6 +6,8 @@ import { Container, Row, Card, Col, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 import { LinkContainer } from 'react-router-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 const UserProfileScreen = ({ match, history }) => {
     const [user, setUser] = useState({});
@@ -101,10 +103,15 @@ const UserProfileScreen = ({ match, history }) => {
             <Row style={{ display: 'flex', juctifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
                 {
                     userInfo && userInfo._id !== user._id ?
-                        (<Card>
-                            <Card.Title>{user.username}</Card.Title>
-                            <LinkContainer to="/messages"><Button onClick={submitHandler} type="submit" variant="primary">Send</Button></LinkContainer>
-                        </Card>) :
+                        ( <Row>
+                            <Card style={{ display: 'flex', juctifyContent: 'left', alignItems: 'center', padding: "10vh" }}>
+                                <Card.Title><FontAwesomeIcon className="mx-2" icon={faUser}></FontAwesomeIcon><strong>{user.username}</strong></Card.Title>
+                                <Card.Text>{user.knownAs + ", " + user.gender}</Card.Text>
+                                <Card.Text>{user.city + ", " + user.country}</Card.Text>
+                                <Card.Text>{user.introduction}</Card.Text>
+                                <LinkContainer to="/messages" style={{ width: '80%', marginTop: "2vh" }}><Button onClick={submitHandler} type="submit" variant="primary"><FontAwesomeIcon className="mx-2" icon={faPaperPlane}></FontAwesomeIcon>Send a message</Button></LinkContainer>
+                            </Card>
+                        </Row>) :
                         (<Card>
                             <Card.Title>{user.username}</Card.Title>
                         </Card>)

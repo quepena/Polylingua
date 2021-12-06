@@ -9,6 +9,8 @@ import { LinkContainer } from 'react-router-bootstrap'
 // import UserProfileScreen from './UserProfileScreen';
 import SearchBox from '../components/SearchBox';
 import { Route } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const UsersScreen = ({ match, history }) => {
     const [users, setUsers] = useState([]);
@@ -40,7 +42,7 @@ const UsersScreen = ({ match, history }) => {
 
     return (
         <Container>
-            <Row>
+            {/* <Row>
                 <Route render={({ history }) => <SearchBox history={history} />} />
             </Row>
             <Row style={{ display: 'flex', juctifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -64,6 +66,30 @@ const UsersScreen = ({ match, history }) => {
                         // (
                         //     <LinkContainer to="/login">Sign in</LinkContainer>
                         // )
+                }
+            </Row> */}
+            <Row>
+                <Route render={({ history }) => <SearchBox history={history} />} />
+            </Row>
+            <Row style={{ display: 'flex', juctifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
+                {
+                    users.map((user) => (
+                        userInfo && user._id === userInfo._id ? ((<div key={user._id}>
+                        </div>)) :
+                            (
+                                <LinkContainer to={`users/${user._id}`} key={user._id} style={{ width: '30vh', margin: '2vh' }}>
+                                    <Card>
+                                        <Card.Body>
+                                            <Card.Title><FontAwesomeIcon className="mx-2" icon={faUser}></FontAwesomeIcon><strong>{user.username}</strong></Card.Title>
+                                            <Card.Text>{user.knownAs.charAt(0).toUpperCase() + user.knownAs.slice(1) + ", "+ user.gender}</Card.Text>
+                                            <Card.Text>{user.city+", "+user.country}</Card.Text>
+                                            <Card.Text>{user.introduction}</Card.Text>
+                                            <Button>Go to profile</Button>
+                                        </Card.Body>
+                                    </Card>
+                                </LinkContainer>
+                            )
+                    ))
                 }
             </Row>
         </Container >

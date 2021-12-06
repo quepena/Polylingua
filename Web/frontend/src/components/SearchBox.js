@@ -8,7 +8,7 @@ const SearchBox = ({ history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if(keyword.trim()) {
+        if (keyword.trim()) {
             history.push(`/search/${keyword}`);
         } else {
             history.push('/')
@@ -16,9 +16,9 @@ const SearchBox = ({ history }) => {
     }
 
     return (
-        <Form onSubmit={submitHandler} inline className="my-5">
-            <Form.Control type='text' name='q' onChange={(e) => setKeyword(e.target.value)} placeholder="Find a user" />
-            <Button type='submit' variant="success"><FontAwesomeIcon className="mx-2" icon={faSearch}></FontAwesomeIcon></Button>
+        <Form onSubmit={submitHandler} style={{ display: "flex", justifyContent: "center", alignItems: "center" }} className="my-5">
+            <Form.Control type='text' name='q' onChange={(e) => setKeyword(e.target.value)} placeholder="Find a user by name, username, language user's learning, country or a city" />
+            <Button type='submit' variant="primary"><FontAwesomeIcon className="mx-2" icon={faSearch}></FontAwesomeIcon></Button>
         </Form>
     )
 }

@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/Header';
-import './bootstrap.min.css';
+import './bootstrap.min (5).css';
 import MessageScreen from './screens/MessageScreen';
 import BlogScreen from './screens/BlogScreen';
 import UsersScreen from './screens/UsersScreen';
@@ -25,7 +25,7 @@ function App() {
       <Route path="/profile" component={UserProfileScreen} exact></Route>
       <Route path="/profile/edit" component={UserScreen} exact></Route>
       <Route path="/admin/users" component={AdminUsersScreen} exact></Route>
-      <Route path="/:id" component={UserProfileScreen}/>
+      <Route path="/users/:id" component={UserProfileScreen}/>
       <Route path="/search/:keyword" component={UsersScreen}/>
     </Router>
   );

@@ -34,7 +34,7 @@ const LoginScreen = ({ location, history }) => {
         <FormContainer>
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader/>}
-            <Form onSubmit={submitHandler}>
+            <Form onSubmit={submitHandler} style={{ marginTop: "3vh", marginBottom: "3vh" }}>
                 <Form.Group controlId="username">
                     <Form.Label>Username</Form.Label>
                     <Form.Control type="" placeholder="Enter your username"
@@ -43,7 +43,7 @@ const LoginScreen = ({ location, history }) => {
                 <Form.Group controlId="password">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Enter your password"
-                        value={password} onChange={(e) => setPassword(e.target.value)}></Form.Control>
+                        value={password} onChange={(e) => setPassword(e.target.value)} style={{marginBottom: "3vh"}}></Form.Control>
                 </Form.Group>
                 <Button variant="primary" type="submit">Sign in</Button>
             </Form>

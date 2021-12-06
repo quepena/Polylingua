@@ -56,12 +56,11 @@ const BlogSectionScreen = ({ match }) => {
             <Card.Body>
                 {
                     posts.map((post) => (
-                        <Card key={post._id}>
+                        <Card key={post._id} style={{ margin: "3vh" }}>
                             <Card.Body>
                                 <LinkContainer to={`/blogs/${post.sectionId}`}><Card.Header>{post.sectionId}</Card.Header></LinkContainer>
                                 <Card.Title>{post.title}</Card.Title>
                                 <Card.Text>{post.contents}</Card.Text>
-                                <Button>Comment</Button>
                             </Card.Body>
                         </Card>
                     ))

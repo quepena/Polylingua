@@ -18,7 +18,7 @@ const Header = () => {
 
     return (
         <header>
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar bg="primary" variant="dark" expand="lg">
                 <Container>
                     <Row>
                         <Col sm={5}>
@@ -57,7 +57,7 @@ const Header = () => {
                                         <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                                     </NavDropdown>
                                 ) : (<LinkContainer to="/login">
-                                    <Nav.Link>Sign in</Nav.Link>
+                                    <Nav.Link>Login</Nav.Link>
                                 </LinkContainer>)
                                 }
                                 {userInfo && userInfo.isAdmin && (
