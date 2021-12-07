@@ -1,6 +1,7 @@
 import express from 'express'
-const router = express.Router();
 import { getCountries, createCountry } from '../controllers/countryController.js';
+
+const router = express.Router();
 
 router.route('/').get(getCountries).post(createCountry);
 

@@ -19,11 +19,6 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    numberOfComments: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
     date: {
         type: Date,
         required: true,

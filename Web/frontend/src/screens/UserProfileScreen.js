@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Card, Col, Button } from 'react-bootstrap';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faUser, faSearch } from '@fortawesome/free-solid-svg-icons';
-// import User from '../components/User';
-import { useDispatch, useSelector } from "react-redux";
+import { Container, Row, Card, Button } from 'react-bootstrap';
+import { useSelector } from "react-redux";
 import axios from 'axios';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,9 +12,16 @@ const UserProfileScreen = ({ match, history }) => {
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
 
-    const dispatch = useDispatch();
-
     const [conversations, setConversations] = useState([]);
+
+    const [age, setAge] = useState('');
+
+    const calculateAge = async (dateOfBirth) => {           
+        var Bdate = dateOfBirth;
+        var Bday = +new Date(Bdate);
+        var calculatedAge = ((Date.now() - Bday) / (31557600000));
+        setAge(calculatedAge)
+    }
 
     useEffect(() => {
         if (userInfo) {
@@ -44,6 +48,7 @@ const UserProfileScreen = ({ match, history }) => {
                 const fetchUser = async () => {
                     const res = await axios.get(`/api/users/users/${match.params.id}`);
                     setUser(res.data);
+                    calculateAge(res.data.dateOfBirth);
                 }
                 fetchUser();
             } else {
@@ -52,6 +57,7 @@ const UserProfileScreen = ({ match, history }) => {
                     setUser(res.data);
                 }
                 fetchUser();
+                calculateAge(userInfo.dateOfBirth);
             }
         } else {
             history.push('/login');
@@ -71,14 +77,12 @@ const UserProfileScreen = ({ match, history }) => {
                 conversations.map(conv => {
                     console.log(conversations);
                     console.log(conv);
-                    // conv.participants.find()
                     const friend = conv.participants.find((m) => m !== userInfo._id)
                     console.log(friend);
                     console.log(match.params.id);
                     if (match.params.id === friend) {
                         flag = false
                     }
-                    // console.log(flag);
                 })
             } else {
                 flag = true
@@ -105,20 +109,25 @@ const UserProfileScreen = ({ match, history }) => {
                     userInfo && userInfo._id !== user._id ?
                         ( <Row>
                             <Card style={{ display: 'flex', juctifyContent: 'left', alignItems: 'center', padding: "10vh" }}>
-                                <Card.Title><FontAwesomeIcon className="mx-2" icon={faUser}></FontAwesomeIcon><strong>{user.username}</strong></Card.Title>
-                                <Card.Text>{user.knownAs + ", " + user.gender}</Card.Text>
+                                <Card.Title style={{marginBottom: "5vh"}}><FontAwesomeIcon className="mx-2" icon={faUser}></FontAwesomeIcon><strong>{user.username}</strong></Card.Title>
+                                <Card.Text>{user.knownAs + ", "  + Math.floor(age) + ", " + user.gender}</Card.Text>
                                 <Card.Text>{user.city + ", " + user.country}</Card.Text>
+                                <Card.Text style={{margin: "2vh"}}>Native Language: <strong>{user.nativeLanguage}</strong></Card.Text>
+                                <Card.Text>Learning: <strong>{user.isLearning}</strong></Card.Text>
                                 <Card.Text>{user.introduction}</Card.Text>
-                                <LinkContainer to="/messages" style={{ width: '80%', marginTop: "2vh" }}><Button onClick={submitHandler} type="submit" variant="primary"><FontAwesomeIcon className="mx-2" icon={faPaperPlane}></FontAwesomeIcon>Send a message</Button></LinkContainer>
+                                <LinkContainer to="/messages" style={{ width: '30%', marginTop: "2vh" }}><Button onClick={submitHandler} type="submit" variant="primary"><FontAwesomeIcon className="mx-2" icon={faPaperPlane}></FontAwesomeIcon>Send a message</Button></LinkContainer>
                             </Card>
                         </Row>) :
-                        (<Card>
-                            <Card.Title>{user.username}</Card.Title>
-                        </Card>)
-                    // ) : 
-                    // (
-                    //     <LinkContainer to="/login">Sign in</LinkContainer>
-                    // )
+                        (<Row>
+                            <Card style={{ display: 'flex', juctifyContent: 'left', alignItems: 'center', padding: "10vh" }}>
+                                <Card.Title style={{marginBottom: "5vh"}}><FontAwesomeIcon className="mx-2" icon={faUser}></FontAwesomeIcon><strong>{userInfo.username}</strong></Card.Title>
+                                <Card.Text>{userInfo.knownAs + ", " + Math.floor(age) + ", " + userInfo.gender}</Card.Text>
+                                <Card.Text>{userInfo.city + ", " + userInfo.country}</Card.Text>
+                                <Card.Text style={{margin: "2vh"}}>Native Language: <strong>{userInfo.nativeLanguage}</strong></Card.Text>
+                                <Card.Text>Learning: <strong>{userInfo.isLearning}</strong></Card.Text>
+                                <Card.Text style={{marginTop: "2vh"}}>{userInfo.introduction}</Card.Text>
+                            </Card>
+                        </Row>)
                 }
             </Row>
         </Container>

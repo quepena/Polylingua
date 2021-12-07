@@ -1,7 +1,6 @@
 import Message from "../models/messageModel.js";
 import asyncHandler from 'express-async-handler';
 import Conversation from "../models/conversationModel.js";
-import User from "../models/userModel.js";
 
 const createConversation = asyncHandler(async (req, res) => {
     const newConversation = await Conversation.create({
@@ -18,12 +17,6 @@ const createConversation = asyncHandler(async (req, res) => {
     }
 })
 
-const getConversations = asyncHandler(async (req, res) => {
-    const conversations = await Conversation.find({})
-
-    res.json(conversations);
-})
-
 const getConversationByUser = asyncHandler(async (req, res) => {
     const conversation = await Conversation.find({
         participants: { $in: [req.params.userId] }
@@ -32,4 +25,4 @@ const getConversationByUser = asyncHandler(async (req, res) => {
     res.json(conversation);
 })
 
-export { getConversations, createConversation, getConversationByUser };
+export { createConversation, getConversationByUser };

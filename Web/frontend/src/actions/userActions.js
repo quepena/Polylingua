@@ -13,7 +13,6 @@ import {
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS,
     USER_UPDATE_PROFILE_FAIL,
-    USER_UPDATE_PROFILE_RESET,
     USER_DELETE_PROFILE_REQUEST,
     USER_DELETE_PROFILE_SUCCESS,
     USER_DELETE_PROFILE_FAIL,
@@ -58,8 +57,6 @@ export const logout = () => (dispatch) => {
 }
 
 export const register = (username, password, knownAs, nativeLanguage, isLearning, dateOfBirth, gender, country, city, introduction) => async (dispatch) => {
-    // export const register = (username, password, knownAs) => async (dispatch) => {
-
     try {
         dispatch({
             type: USER_REGISTER_REQUEST
@@ -72,8 +69,6 @@ export const register = (username, password, knownAs, nativeLanguage, isLearning
         }
 
         const { data } = await axios.post('/api/users', { username, password, knownAs, nativeLanguage, isLearning, dateOfBirth, gender, country, city, introduction }, config);
-        // const { data } = await axios.post('/api/users', {username, password, knownAs}, config);
-
 
         dispatch({
             type: USER_REGISTER_SUCCESS,

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Container, Form, Button } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap';
+import { Card, Container, Form, Button, Row } from 'react-bootstrap'
 import { useSelector } from "react-redux";
 import axios from 'axios'
 
@@ -47,25 +46,27 @@ const BlogSectionScreen = ({ match }) => {
     }
 
     return (
-        <Container>
-            <Form onSubmit={submitHandler}>
-                <Form.Control type="" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)}></Form.Control>
-                <Form.Control onChange={(e) => setContents(e.target.value)} value={contents} as="textarea" placeholder="Write a new post" />
-                <Button type="submit" className="my-4" variant="success">Publish</Button>
-            </Form>
-            <Card.Body>
-                {
-                    posts.map((post) => (
-                        <Card key={post._id} style={{ margin: "3vh" }}>
-                            <Card.Body>
-                                <LinkContainer to={`/blogs/${post.sectionId}`}><Card.Header>{post.sectionId}</Card.Header></LinkContainer>
-                                <Card.Title>{post.title}</Card.Title>
-                                <Card.Text>{post.contents}</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    ))
-                }
-            </Card.Body>
+        <Container style={{ dispay: "flex", justifyContent: "center", alignItems: "center", width: "150vh" }}>
+            <Row>
+                <h1 style={{ marginTop: "3vh", marginBottom: "3vh" }}>{userInfo.isLearning}</h1>
+                <Form onSubmit={submitHandler}>
+                    <Form.Control style={{ marginBottom: "2vh" }} type="" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)}></Form.Control>
+                    <Form.Control onChange={(e) => setContents(e.target.value)} value={contents} as="textarea" style={{ height: '100px' }} placeholder="Write a new post" />
+                    <Button type="submit" className="my-4" variant="primary">Publish</Button>
+                </Form>
+                <Card.Body>
+                    {
+                        posts.map((post) => (
+                            <Card key={post._id} style={{ marginTop: "3vh", width: "100%" }}>
+                                <Card.Body>
+                                    <Card.Header style={{marginBottom: "2vh"}}>{post.title}</Card.Header>
+                                    <Card.Text>{post.contents}</Card.Text>
+                                </Card.Body>
+                            </Card>
+                        ))
+                    }
+                </Card.Body>
+            </Row>
         </Container>
     )
 }

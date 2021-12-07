@@ -5,16 +5,6 @@ const languageSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        lowercase: true,
-    },
-    flagUrl: {
-        type: String,
-        required: true,
-    },
-    numberOfSubscribers: {
-        type: Number,
-        required: true,
-        default: 0,
     },
 }, {
     timestamps: true

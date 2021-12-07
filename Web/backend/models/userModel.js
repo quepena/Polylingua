@@ -47,15 +47,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    interests: {
-        type: String,
-    },
     created: {
-        type: Date,
-        required: true,
-        default: Date.now
-    },
-    lastActive: {
         type: Date,
         required: true,
         default: Date.now
@@ -65,10 +57,6 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: false
     },
-    photo: {
-        type: String,
-        required: false
-    }
 }, {
     timestamps: true
 })

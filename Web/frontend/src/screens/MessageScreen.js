@@ -2,9 +2,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Row, Col, Card, Container, Form, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-// import { messagesListByConversation, conversationsListByUser } from '../actions/messageActions';
-// import Loader from "../components/Loader";
-// import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 import ChatMessage from '../components/ChatMessage';
@@ -22,8 +19,6 @@ const MessageScreen = ({ history }) => {
 
     const [newMessage, setNewMessage] = useState('');
     const [arrivedMessage, setArrivedMessage] = useState(null);
-
-    const [friend, setFriend] = useState([]);
 
     const socket = useRef();
 
@@ -133,50 +128,50 @@ const MessageScreen = ({ history }) => {
     return (
         <>
             <Container>
-            <Card>
-                        <Card.Body>
-                            <Row>
-                                <Col md={4} style={{ border: "solid #593196 3px", borderRadius: "2%", margin: "1%" }}>
-                                    {
-                                        conversations.map((c) => (
-                                            <div onClick={() => {
-                                                setCurrentConversation(c);
-                                            }}><Conversation conversation={c} />
-                                            </div>
-                                        ))
-                                    }
+                <Card>
+                    <Card.Body>
+                        <Row>
+                            <Col md={4} style={{ border: "solid #593196 3px", borderRadius: "2%", margin: "1%" }}>
+                                {
+                                    conversations.map((c) => (
+                                        <div onClick={() => {
+                                            setCurrentConversation(c);
+                                        }}><Conversation conversation={c} />
+                                        </div>
+                                    ))
+                                }
 
-                                </Col>
-                                <Col>
-                                    {currentConversation ? (
-                                        <Col>
-                                            <Col className="chatBox">
+                            </Col>
+                            <Col>
+                                {currentConversation ? (
+                                    <Col>
+                                        <Col className="chatBox">
 
-                                                <Col md={8} className="chatBoxWrapper">
-                                                    {
-                                                        messages.map((message) => (
-                                                            <div ref={scrollRef}>
-                                                                <ChatMessage chatMessage={message} own={message.sender === userInfo._id} conversation={currentConversation} />
-                                                            </div>
-                                                        ))
-                                                    }
-
-                                                </Col>
+                                            <Col md={8} className="chatBoxWrapper">
+                                                {
+                                                    messages.map((message) => (
+                                                        <div ref={scrollRef}>
+                                                            <ChatMessage chatMessage={message} own={message.sender === userInfo._id} conversation={currentConversation} />
+                                                        </div>
+                                                    ))
+                                                }
 
                                             </Col>
-                                            <Col style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-                                                <Form.Control onChange={(e) => setNewMessage(e.target.value)} value={newMessage} className="mx-2" as="textarea" placeholder="Write a message here" />
-                                                <Button onClick={submitHandler} type="submit" variant="primary"><FontAwesomeIcon className="mx-2" icon={faPaperPlane}></FontAwesomeIcon></Button>
-                                            </Col>
+
                                         </Col>
-                                    ) : (
-                                        <p style={{ fontSize: "25px" }}>Choose a conversation to chat!</p>
-                                    )}
-                                </Col>
+                                        <Col style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+                                            <Form.Control onChange={(e) => setNewMessage(e.target.value)} value={newMessage} className="mx-2" as="textarea" placeholder="Write a message here" />
+                                            <Button onClick={submitHandler} type="submit" variant="primary"><FontAwesomeIcon className="mx-2" icon={faPaperPlane}></FontAwesomeIcon></Button>
+                                        </Col>
+                                    </Col>
+                                ) : (
+                                    <p style={{ fontSize: "25px" }}>Choose a conversation to chat!</p>
+                                )}
+                            </Col>
 
-                            </Row>
-                        </Card.Body>
-                    </Card>
+                        </Row>
+                    </Card.Body>
+                </Card>
             </Container>
         </>
     )

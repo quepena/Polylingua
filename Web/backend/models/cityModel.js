@@ -5,12 +5,10 @@ const citySchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        lowercase: true,
     },
     countryId: {
         type: String,
         required: true,
-        ref: 'Country'
     },
 }, {
     timestamps: true

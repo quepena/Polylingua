@@ -1,6 +1,7 @@
 import express from 'express'
-const router = express.Router();
 import { getLanguages, createLanguage } from '../controllers/languageController.js';
+
+const router = express.Router();
 
 router.route('/').get(getLanguages).post(createLanguage);
 

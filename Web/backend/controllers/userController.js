@@ -47,7 +47,21 @@ const getUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
 
     if (user) {
-        res.json(user)
+        res.json({
+            _id: user._id,
+            username: user.username,
+            password: user.password,
+            knownAs: user.knownAs,
+            gender: user.gender,
+            nativeLanguage: user.nativeLanguage,
+            isLearning: user.isLearning,
+            country: user.country,
+            dateOfBirth: user.dateOfBirth,
+            city: user.city,
+            introduction: user.introduction,
+            isAdmin: user.isAdmin,
+            token: generateToken(user._id),
+        })
     } else {
         res.status(404).json({ message: 'User not found' });
     }
@@ -59,10 +73,17 @@ const getCurrentUserProfile = asyncHandler(async (req, res) => {
     if (user) {
         res.json({
             _id: user._id,
-            knownAs: user.knownAs,
             username: user.username,
+            password: user.password,
+            knownAs: user.knownAs,
+            gender: user.gender,
             nativeLanguage: user.nativeLanguage,
             isLearning: user.isLearning,
+            country: user.country,
+            dateOfBirth: user.dateOfBirth,
+            city: user.city,
+            introduction: user.introduction,
+            isAdmin: user.isAdmin,
             token: generateToken(user._id),
         });
     } else {
@@ -108,9 +129,16 @@ const authUser = asyncHandler(async (req, res) => {
     else if (user && (await user.matchPassword(password))) {
         res.json({
             _id: user._id,
-            knownAs: user.knownAs,
             username: user.username,
+            password: user.password,
+            knownAs: user.knownAs,
+            gender: user.gender,
+            nativeLanguage: user.nativeLanguage,
             isLearning: user.isLearning,
+            country: user.country,
+            dateOfBirth: user.dateOfBirth,
+            city: user.city,
+            introduction: user.introduction,
             isAdmin: user.isAdmin,
             token: generateToken(user._id),
         });

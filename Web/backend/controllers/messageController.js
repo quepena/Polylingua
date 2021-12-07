@@ -20,12 +20,6 @@ const createMessage = asyncHandler(async(req, res) => {
     }
 })
 
-const getMessages = asyncHandler(async(req, res) => {
-    const messages = await Message.find({})
-
-    res.json(messages);
-})
-
 const getMessageByConversation = asyncHandler(async (req, res) => {
     const message = await Message.find({
         conversationId: req.params.conversation
@@ -34,4 +28,4 @@ const getMessageByConversation = asyncHandler(async (req, res) => {
     res.json(message);
 })
 
-export { getMessages, createMessage, getMessageByConversation };
+export { createMessage, getMessageByConversation };

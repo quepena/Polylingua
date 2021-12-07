@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
-import { Container, Row, InputGroup, FormControl, Card, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-// import User from '../components/User';
-// import axios from 'axios';
-// import users from '../users';
+import { Container, Row, Card, Button, Col } from 'react-bootstrap';
 import { adminUsersList, adminUsersDelete } from '../actions/adminActions';
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from 'react-router-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const AdminUsersScreen = ({ history }) => {
     const dispatch = useDispatch();
@@ -41,22 +38,28 @@ const AdminUsersScreen = ({ history }) => {
         <>
             {loading ? <Loader /> : error ? <Message variant="danger">{error}</Message> : (
                 <Container>
-                    <Row>
-                        <InputGroup className="my-5">
-                            <FormControl placeholder="Find a user" />
-                            <Button variant="success"><FontAwesomeIcon className="mx-2" icon={faSearch}></FontAwesomeIcon></Button>
-                        </InputGroup>
-                    </Row>
-                    <Row style={{ display: 'flex', juctifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <Row style={{ display: 'flex', juctifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', marginTop: "5vh" }}>
                         {
                             users.map((user) => (
-                                <Card style={{ width: '25%', margin: '2%' }} key={user._id}>
-                                    <Card.Body>
-                                        <Card.Title>{user.username}</Card.Title>
-                                        <LinkContainer to={`/admin/user/${user._id}/edit`}><Button variant="light">Edit account</Button></LinkContainer>
-                                        <Button variant="danger" onClick={() => deleteHandler(user._id)}>Delete account</Button>
-                                    </Card.Body>
-                                </Card>
+                                userInfo && user._id === userInfo._id ? ((<>
+                                </>)) :
+                                    (
+                                        <Col>
+                                            <LinkContainer to={`users/${user._id}`} key={user._id} style={{ width: '30vh', margin: '2vh' }}>
+                                                <Card>
+                                                    <Card.Body>
+                                                        <Card.Title style={{ marginBottom: "3vh" }}><FontAwesomeIcon className="mx-2" icon={faUser}></FontAwesomeIcon><strong>{user.username}</strong></Card.Title>
+                                                        <Card.Text>{user.knownAs.charAt(0).toUpperCase() + user.knownAs.slice(1) + ", " + user.gender}</Card.Text>
+                                                        <Card.Text>{user.city + ", " + user.country}</Card.Text>
+                                                        <Card.Text style={{ marginTop: "3vh" }}>Native Language: <strong>{user.nativeLanguage}</strong></Card.Text>
+                                                        <Card.Text>Learning: <strong>{user.isLearning}</strong></Card.Text>
+                                                        <Card.Text>{user.introduction}</Card.Text>
+                                                        <Button variant="danger" style={{ marginTop: "2vh" }} onClick={() => deleteHandler(user._id)}>Delete account</Button>
+                                                    </Card.Body>
+                                                </Card>
+                                            </LinkContainer>
+                                        </Col>
+                                    )
                             ))
                         }
                     </Row>

@@ -2,7 +2,6 @@ import './App.css';
 import Header from './components/Header';
 import './bootstrap.min (5).css';
 import MessageScreen from './screens/MessageScreen';
-import BlogScreen from './screens/BlogScreen';
 import UsersScreen from './screens/UsersScreen';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LoginScreen from './screens/LoginScreen';
@@ -17,7 +16,6 @@ function App() {
     <Router>
       <Header />
       <Route path='/messages' component={MessageScreen} exact />
-      <Route path='/blogs' component={BlogScreen} exact />
       <Route path='/blogs/:id' component={BlogSectionScreen} />
       <Route path='/' component={UsersScreen} exact />
       <Route path="/login" component={LoginScreen} exact ></Route>

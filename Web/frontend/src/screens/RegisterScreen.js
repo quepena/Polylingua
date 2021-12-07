@@ -9,7 +9,6 @@ import Message from "../components/Message";
 import axios from "axios";
 
 const RegisterScreen = ({ location, history }) => {
-    // const [step] = useState(1);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -53,7 +52,7 @@ const RegisterScreen = ({ location, history }) => {
 
     }, [history, userInfo, redirect])
 
-    const calculateAge = async (dateOfBirth) => {           
+    const calculateAge = async (dateOfBirth) => {
         var Bdate = dateOfBirth;
         var Bday = +new Date(Bdate);
         var calculatedAge = ((Date.now() - Bday) / (31557600000));
@@ -96,31 +95,15 @@ const RegisterScreen = ({ location, history }) => {
             setMessage('Enter your introduction please!');
         } else {
             dispatch(register(username, password, knownAs, selectedNativeLanguage, selectedIsLearning, dateOfBirth, gender, selectedCountry, selectedCity, introduction));
-            // dispatch(register(username, password, knownAs))
         }
     }
-
-    // switch (step) {
-    //     case 1:
-    //         return (
-    //             <FormContainer>
-
-    //             </FormContainer>
-    //         )
-    //     case 2:
-    //         return (
-    //             <FormContainer>
-
-    //             </FormContainer>
-    //         )
-    // }
 
     return (
         <FormContainer>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}
-            <Form onSubmit={submitHandler}>
+            <Form onSubmit={submitHandler} style={{ margin: "5vh" }}>
                 <Form.Group controlId="username">
                     <Form.Label>Username</Form.Label>
                     <Form.Control type="" placeholder="Enter your username"
@@ -161,7 +144,6 @@ const RegisterScreen = ({ location, history }) => {
                 </Form.Group>
                 <Form.Group controlId="isLearning">
                     <Form.Label>Language you want to learn</Form.Label>
-                    {/* <Form.Control as="select" multiple value={selectedIsLearning} onChange={e => setSelectedIsLearning([].slice.call(e.target.selectedOptions).map(item => item.value))}> */}
                     <Form.Control as="select" type="" value={selectedIsLearning}
                         onChange={(e) => setSelectedIsLearning(e.target.value)}>
                         {
@@ -230,13 +212,12 @@ const RegisterScreen = ({ location, history }) => {
                         value={introduction} onChange={(e) => setIntroduction(e.target.value)}
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit">Next</Button>
+                <Button style={{marginTop: "3vh"}} variant="primary" type="submit">Register</Button>
             </Form>
 
             <Row className="py-3">
                 <Col>
-                    Already have an account?
-                    <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Login</Link>
+                    Already have an account?<Link to={redirect ? `/login?redirect=${redirect}` : '/login'}> Login</Link>
                 </Col>
             </Row>
         </FormContainer>
