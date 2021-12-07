@@ -43,7 +43,7 @@ const LoginScreen = ({ location, history }) => {
                 <Form.Group controlId="password">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Enter your password"
-                        value={password} onChange={(e) => setPassword(e.target.value)} style={{marginBottom: "3vh"}}></Form.Control>
+                        value={password} onChange={(e) => setPassword(e.target.value)} style={{ marginBottom: "3vh" }}></Form.Control>
                 </Form.Group>
                 <Button variant="primary" type="submit">Sign in</Button>
             </Form>
