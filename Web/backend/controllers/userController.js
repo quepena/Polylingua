@@ -96,8 +96,7 @@ const updateCurrentUserProfile = asyncHandler(async (req, res) => {
 
     if (user) {
         user.username = req.body.username || user.username
-        user.nativeLanguage = req.body.nativeLanguage || user.nativeLanguage;
-        // user.isLearning = req.body.isLearning || user.isLearning;
+        
         if (req.body.password) {
             user.password = req.body.password;
         }

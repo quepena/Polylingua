@@ -79,11 +79,11 @@ const UserScreen = ({ history }) => {
                         value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}>
                     </Form.Control>
                 </Form.Group>
+                <Col style={{ marginTop: "3vh", display: "flex", justifyContent: "space-around", alignItems: "center", flexWrap: "norap" }}>
+                    <Button variant="primary" type="submit">Update profile</Button>
+                    <Button onClick={deleteHandler} variant="danger" type="submit">Delete account</Button>
+                </Col>
             </Form>
-            <Col style={{ marginTop: "3vh", display: "flex", justifyContent: "space-around", alignItems: "center", flexWrap: "norap" }}>
-                <Button variant="primary" type="submit">Update profile</Button>
-                <Button onClick={deleteHandler} variant="danger" type="submit">Delete account</Button>
-            </Col>
         </FormContainer>
     )
 }
