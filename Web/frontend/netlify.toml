@@ -6,7 +6,7 @@
   headers = {Access-Control-Allow-Origin = "*"}
 
 [[redirects]]
-  from = "/api/login/"
+  from = "/api/users/login/"
   to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/users/login/"
   status = 200
   force = true
