@@ -1,0 +1,116 @@
+[[redirects]]
+  from = "/api/blogs/*"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/blogs/:splat"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/login/"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/login/"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/users/"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/users"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/users/users/"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/users/users"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/users/users/profile/"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/users/users/profile"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/users/users/*"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/users/users/:splat"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/messages/"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/messages"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/messages/*"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/messages/:splat"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/languages/"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/languages"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/countries/"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/countries"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/users/"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/users"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/conversations/"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/conversations"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/conversations/*"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/conversations/:splat"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/cities/*"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/cities/:splat"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/admin/users/"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/admin/users"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/api/admin/users/*"
+  to = "https://expressjs-mongoose-production-cf88.up.railway.app/api/admin/users/:splat"
+  status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
